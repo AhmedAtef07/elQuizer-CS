@@ -27,9 +27,10 @@ namespace elQuizer_CS
             {
                 if (i == answerIndex)
 	            {
-		            question += "_______";
+		            question += "_______ ";
+                    continue;
 	            }
-                question += questionTokens[i];
+                question += questionTokens[i] + ' ';
             }
             return question;
         }

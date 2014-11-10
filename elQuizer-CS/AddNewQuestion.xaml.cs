@@ -132,19 +132,19 @@ namespace elQuizer_CS
                         new FillTheBlankQuestion(question_txt.Text,
                                                  tokenSelected));
                     break;
-                case "Mutli Choice":
+                case "Mutlichoice":
                     if (choices_sp.Children.Count < 2) {
                         MessageBox.Show("You must have 2 choices at least.");
                         return;
                     }
-                    int choiceSelected = getSelectedToken();
+                    int choiceSelected = getSelectedChoice();
                     if (choiceSelected == -1) {
-                        MessageBox.Show(
-                            "Select the correct choice for the question");
+                        MessageBox.Show("Select the correct choice.");
                         return;
                     }
                     QuestionBank.questions.Add(
-                        new MutliChoiceQuestion(question_txt.Text,getChoices(),                                     getSelectedChoice()));
+                        new MutliChoiceQuestion(
+                            question_txt.Text, getChoices(), choiceSelected));
                     break;
                 case "True False":
                     QuestionBank.questions.Add(
@@ -153,6 +153,20 @@ namespace elQuizer_CS
                     break;
                 default:
                     break;
+            }
+
+            MessageBoxResult result = MessageBox.Show(
+                "Question is added.\nWant to add another?", "Added", 
+                MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                AddNewQuestion addNewQuestion = new AddNewQuestion();
+                this.Close();
+                addNewQuestion.ShowDialog();
+            }
+            else
+            {
+                this.Close();
             }
         }
 
@@ -194,6 +208,16 @@ namespace elQuizer_CS
         {
             if (true_rb.IsChecked == true) return true;
             return false;
+        }
+
+        private void window_keydown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.S && 
+                (Keyboard.Modifiers & ModifierKeys.Control) == 
+                ModifierKeys.Control)
+            {
+                add_question_btn_Click(null, null);
+            }
         }
 
         

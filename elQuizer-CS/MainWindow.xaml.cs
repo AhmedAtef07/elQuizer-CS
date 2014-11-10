@@ -33,5 +33,11 @@ namespace elQuizer_CS
             //addNewQuestion.Show();
             addNewQuestion.ShowDialog();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            QuestionsManager questionsManager = new QuestionsManager();
+            questionsManager.ShowDialog();
+        }
     }
 }

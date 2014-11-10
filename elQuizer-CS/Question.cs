@@ -35,6 +35,10 @@ namespace elQuizer_CS
           return answer;
         }
 
+        QuestionType getQuestionType()
+        {
+            return questionType;
+        }
         public void setAnswer(object answer)
         {
             this.answer = answer;
@@ -48,8 +52,8 @@ namespace elQuizer_CS
             return this.answer.Equals(answer) ;
         }    
     
-        public string toString() {
-            return "Question: " + getAnswer() ;
+        public override string ToString() {
+            return "Question: " + getQuestion() ;
         }
     }
 }
