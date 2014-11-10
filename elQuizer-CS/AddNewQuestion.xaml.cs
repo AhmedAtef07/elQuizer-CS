@@ -25,7 +25,8 @@ namespace elQuizer_CS
             InitializeComponent();
         }
 
-        private void question_txt_TextChanged(object sender, TextChangedEventArgs e)
+        private void question_txt_TextChanged(object sender, 
+                                              TextChangedEventArgs e)
         {
             FillTheBlank();
         }
@@ -61,7 +62,7 @@ namespace elQuizer_CS
         {
             if (choices_sp.Children.Count == 5)
             {
-                MessageBox.Show("You only can have choices up to 5.");
+                MessageBox.Show("You can only have up to 5 choices.");
                 return;
             }
             if (!isValidChoice(mutli_txt.Text))
@@ -91,7 +92,8 @@ namespace elQuizer_CS
             return true;
         }
 
-        void NewChoice_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        void NewChoice_MouseRightButtonDown(object sender,
+                                            MouseButtonEventArgs e)
         {
             mutli_txt.Text = ((RadioButton)sender).Content.ToString();
             choices_sp.Children.Remove((RadioButton)sender);
@@ -110,29 +112,89 @@ namespace elQuizer_CS
         {
             if (question_txt.Text == "")
             {
-                MessageBox.Show("Question must not be empty!");
+                MessageBox.Show("Where is the question?!");
                 return;
             }
             switch (((TabItem)question_tabs.SelectedItem).Header.ToString())
             {
                 case "Short Answer":
+                    QuestionBank.questions.Add(
+                        new ShortAnswerQuestion(question_txt.Text,
+                                                short_answer_txt.Text));
                     break;
                 case "Fill The Blank":
+                    int tokenSelected = getSelectedToken();
+                    if (tokenSelected == -1) {
+                        MessageBox.Show("Select the word to be filled.");
+                        return;
+                    }
+                    QuestionBank.questions.Add(
+                        new FillTheBlankQuestion(question_txt.Text,
+                                                 tokenSelected));
                     break;
                 case "Mutli Choice":
+                    if (choices_sp.Children.Count < 2) {
+                        MessageBox.Show("You must have 2 choices at least.");
+                        return;
+                    }
+                    int choiceSelected = getSelectedToken();
+                    if (choiceSelected == -1) {
+                        MessageBox.Show(
+                            "Select the correct choice for the question");
+                        return;
+                    }
+                    QuestionBank.questions.Add(
+                        new MutliChoiceQuestion(question_txt.Text,getChoices(),                                     getSelectedChoice()));
                     break;
                 case "True False":
+                    QuestionBank.questions.Add(
+                        new TrueFalseQuestion(question_txt.Text, 
+                                              getTrueOrFalse()));
                     break;
                 default:
                     break;
             }
         }
 
-       
+        int getSelectedToken() {
 
-        
+            for (int i = 0; i < blanks_wrap.Children.Count; i++)
+            {
+                if (((ToggleButton)blanks_wrap.Children[i]).IsChecked == true)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
 
+        List<string> getChoices()
+        {
+            List<string> choices = new List<string>();
+            foreach (RadioButton item in choices_sp.Children)
+            {
+                choices.Add(item.Content.ToString());
+            }
+            return choices;
+        }
 
+        int getSelectedChoice()
+        {
+            List<string> choices = new List<string>();
+            for (int i = 0; i < choices_sp.Children.Count; i++)
+			{
+			    if(((RadioButton)choices_sp.Children[i]).IsChecked == true) {
+                    return i ;
+                }
+			}            
+            return -1;
+        }
+
+        bool getTrueOrFalse()
+        {
+            if (true_rb.IsChecked == true) return true;
+            return false;
+        }
 
         
     }

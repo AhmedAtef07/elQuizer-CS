@@ -59,6 +59,7 @@
     <Compile Include="FillTheBlankQuestion.cs" />
     <Compile Include="MutliChoiceQuestion.cs" />
     <Compile Include="Question.cs" />
+    <Compile Include="QuestionBank.cs" />
     <Compile Include="ShortAnswerQuestion.cs" />
     <Compile Include="TrueFalseQuestion.cs" />
     <Page Include="AddNewQuestion.xaml">
