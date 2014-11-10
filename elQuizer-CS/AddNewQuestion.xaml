@@ -1,0 +1,81 @@
+﻿<Window x:Class="elQuizer_CS.AddNewQuestion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AddNewQuestion" Height="353" Width="537" WindowStartupLocation="CenterScreen">
+    <StackPanel>
+        <Grid Margin="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Question:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox x:Name="question_txt" MaxLength="100" VerticalContentAlignment="Center" Grid.Column="1" TextChanged="question_txt_TextChanged"></TextBox>
+        </Grid>
+        <TabControl x:Name="question_tabs" Margin="7,0,7,7" >
+            <TabItem Header="Short Answer">
+                <StackPanel>
+                    <Grid Margin="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Correct Answer:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="short_answer_txt" Grid.Column="1" MaxLength="100" VerticalAlignment="Stretch" VerticalContentAlignment="Center"></TextBox>
+                    </Grid>
+                </StackPanel>
+
+            </TabItem>
+            <TabItem Header="Fill The Blank">
+                <StackPanel>
+                    <Grid Margin="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Correct Answer:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <WrapPanel x:Name="blanks_wrap" Grid.Column="1"/>
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Mutli Choice">
+                <StackPanel>
+                    <Grid Margin="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Choice:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="mutli_txt" Grid.Column="1" VerticalAlignment="Stretch" MaxLength="100" VerticalContentAlignment="Center" Margin="0,0,7,0" KeyDown="mutli_key_down"></TextBox>
+                        <Button x:Name="mutli_btn" Grid.Column="2" Width="50" Height="26" VerticalAlignment="Top" Click="mutli_btn_Click">Add</Button>
+                    </Grid>
+                    <Grid Margin="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Correct Choice:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <StackPanel Name="choices_sp" Grid.Column="1" VerticalAlignment="Center" Margin="10,10,0,0"/>
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="True False">
+                <StackPanel>
+                    <Grid Margin="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Correct Answer:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="10,10,0,0">
+                            <RadioButton Content="True"  Margin="0,0,0,7" IsChecked="True"/>
+                            <RadioButton Content="False" Margin="0,0,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+        <Button x:Name="add_question_btn" Margin="7,0,7,0" Height="27" Click="add_question_btn_Click">Add Question</Button>
+    </StackPanel>
+</Window>

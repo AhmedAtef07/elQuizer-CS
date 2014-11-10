@@ -1,0 +1,15 @@
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\bin\Debug\elQuizer-CS.exe.config
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS.csprojResolveAssemblyReference.cache
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\AddNewQuestion.baml
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\MainWindow.baml
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\AddNewQuestion.g.cs
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\MainWindow.g.cs
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\App.g.cs
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS_MarkupCompile.cache
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS.g.resources
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer_CS.Properties.Resources.resources
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS.csproj.GenerateResource.Cache
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\bin\Debug\elQuizer-CS.exe
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\bin\Debug\elQuizer-CS.pdb
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS.exe
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS.pdb
