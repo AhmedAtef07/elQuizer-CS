@@ -9,6 +9,6 @@ namespace elQuizer_CS
     class ShortAnswerQuestion : Question
     {
         public ShortAnswerQuestion(string question, string answer)
-            : base(question, answer, QuestionType.ShortAnswer) { }
+            : base(question, answer, QuestionType.ShortAnswer) { }        
     }
 }

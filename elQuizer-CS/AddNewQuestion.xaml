@@ -37,7 +37,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Label Content="Correct Answer:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Label Content="Words:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <WrapPanel x:Name="blanks_wrap" Grid.Column="1"/>
                         </Grid>
                     </StackPanel>
@@ -50,7 +50,7 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Label Content="Choice:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Label Content="New Choice:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <TextBox x:Name="mutli_txt" Grid.Column="1" VerticalAlignment="Stretch" MaxLength="100" VerticalContentAlignment="Center" Margin="0,0,7,0" KeyDown="mutli_key_down"></TextBox>
                             <Button x:Name="mutli_btn" Grid.Column="2" Width="50" Height="26" VerticalAlignment="Top" Click="mutli_btn_Click">Add (↵)</Button>
                         </Grid>

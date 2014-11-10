@@ -10,5 +10,10 @@ namespace elQuizer_CS
     {
         public TrueFalseQuestion(string question, bool answer) 
             : base(question, answer, QuestionType.TrueFalse) { }
+        public override string getFileLineString()
+        {
+            return getQuestionTypeValue() + "," + base.getQuestion() + ","
+                + ((bool)getAnswer()?"1":"0");
+        }
     }
 }

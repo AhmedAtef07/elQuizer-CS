@@ -9,11 +9,13 @@ namespace elQuizer_CS
     class MutliChoiceQuestion : Question
     {
         List<String> choices;
-        public MutliChoiceQuestion(string question, List<String> choices, 
-            int answer) : base(question, choices[answer], 
+        int answerIndex;
+        public MutliChoiceQuestion(string question, int answer,
+            List<String> choices) : base(question, choices[answer], 
                                QuestionType.MutliChoice)
         {
             this.choices = choices;
+            answerIndex = answer;
         }
 
         public List<String> getChoices()
@@ -26,7 +28,8 @@ namespace elQuizer_CS
             bool[] isVis = new bool[choices.Count];
             List<String> shuffledChoices = new List<string>();
             Random rand = new Random();
-            for (int i = 0, t = rand.Next(choices.Count); i < choices.Count; ++i) {
+            for (int i = 0, t = rand.Next(choices.Count); i < choices.Count;
+                 ++i) {
                 while (!isVis[t]) {
                     t = rand.Next(choices.Count);
                 }
@@ -34,6 +37,12 @@ namespace elQuizer_CS
                 shuffledChoices.Add(choices[t]);
             }
             return shuffledChoices;
+        }
+
+        public override string getFileLineString()
+        {
+            return getQuestionTypeValue() + "," + getQuestion() + "," 
+                + answerIndex + "," + string.Join(",", choices.ToArray());
         }
 
     }

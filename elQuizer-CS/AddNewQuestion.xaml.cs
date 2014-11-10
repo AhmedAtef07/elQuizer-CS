@@ -107,10 +107,10 @@ namespace elQuizer_CS
                 mutli_btn_Click(sender, null);
             }
         }
-
+            
         private void add_question_btn_Click(object sender, RoutedEventArgs e)
         {
-            if (question_txt.Text == "")
+            if (question_txt.Text.Trim() == "")
             {
                 MessageBox.Show("Where is the question?!");
                 return;
@@ -118,6 +118,11 @@ namespace elQuizer_CS
             switch (((TabItem)question_tabs.SelectedItem).Header.ToString())
             {
                 case "Short Answer":
+                    if (short_answer_txt.Text.Trim() == "")
+                    {
+                        MessageBox.Show("Where is the answer?!");
+                        return;
+                    }
                     QuestionBank.questions.Add(
                         new ShortAnswerQuestion(question_txt.Text,
                                                 short_answer_txt.Text));
@@ -144,7 +149,7 @@ namespace elQuizer_CS
                     }
                     QuestionBank.questions.Add(
                         new MutliChoiceQuestion(
-                            question_txt.Text, getChoices(), choiceSelected));
+                            question_txt.Text, choiceSelected, getChoices()));
                     break;
                 case "True False":
                     QuestionBank.questions.Add(

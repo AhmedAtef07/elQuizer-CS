@@ -34,6 +34,12 @@ namespace elQuizer_CS
             }
             return question;
         }
+
+        public override string getFileLineString()
+        {
+            return getQuestionTypeValue() + "," + base.getQuestion() + ","
+                + answerIndex;
+        }
     
     }
 }

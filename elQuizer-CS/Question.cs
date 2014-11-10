@@ -31,29 +31,41 @@ namespace elQuizer_CS
             return question;
         }
 
-        public object getAnswer() {
-          return answer;
+        public object getAnswer()
+        {
+            return answer;
         }
 
-        QuestionType getQuestionType()
+        public QuestionType getQuestionType()
         {
             return questionType;
+        }
+        public int getQuestionTypeValue()
+        {
+            return (int)questionType;
         }
         public void setAnswer(object answer)
         {
             this.answer = answer;
         }
-        public bool checkAnswer(object answer) {
+        public bool checkAnswer(object answer)
+        {
             if (answer is String)
             {
                 return (((string)this.answer).ToLower() ==
                        ((string)answer).ToLower());
             }
-            return this.answer.Equals(answer) ;
-        }    
-    
-        public override string ToString() {
-            return "Question: " + getQuestion() ;
+            return this.answer.Equals(answer);
+        }
+
+        public override string ToString()
+        {
+            return "Question: " + getQuestion() + ", Answer: " + getAnswer();
+        }
+        public virtual string getFileLineString()
+        {
+            return getQuestionTypeValue() + "," + getQuestion() + "," 
+                + getAnswer();
         }
     }
 }
