@@ -26,7 +26,8 @@ namespace elQuizer_CS
             this.questionType = questionType;
         }
 
-        public string getQuestion() {
+        public virtual string getQuestion()
+        {
             return question;
         }
 
@@ -34,7 +35,11 @@ namespace elQuizer_CS
           return answer;
         }
 
-        public virtual bool checkAnswer(object answer) {
+        public void setAnswer(object answer)
+        {
+            this.answer = answer;
+        }
+        public bool checkAnswer(object answer) {
             if (answer is String)
             {
                 return (((string)this.answer).ToLower() ==
@@ -44,7 +49,7 @@ namespace elQuizer_CS
         }    
     
         public string toString() {
-            return "Question: " + question ;
+            return "Question: " + getAnswer() ;
         }
     }
 }

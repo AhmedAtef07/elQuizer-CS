@@ -9,20 +9,32 @@ namespace elQuizer_CS
     class MutliChoiceQuestion : Question
     {
         List<String> choices;
-        public MutliChoiceQuestion(string question, int answer) 
-            : base(question, answer, QuestionType.MutliChoice) {
-                choices = new List<String>();                
+        public MutliChoiceQuestion(string question, List<String> choices, 
+            int answer) : base(question, choices[answer], 
+                               QuestionType.MutliChoice)
+        {
+            this.choices = choices;
         }
 
-        public override bool checkAnswer(string answer)
-        {
-            foreach (string item in choices)
-            {
-                if (item == answer) {
-                    
-                }
-            }
-            return base.checkAnswer(answer);
+        public List<String> getChoices()
+        {   
+            return choices;
         }
+
+        public List<String> getShuffledChoices()
+        {
+            bool[] isVis = new bool[choices.Count];
+            List<String> shuffledChoices = new List<string>();
+            Random rand = new Random();
+            for (int i = 0, t = rand.Next(choices.Count); i < choices.Count; ++i) {
+                while (!isVis[t]) {
+                    t = rand.Next(choices.Count);
+                }
+                isVis[t] = true;
+                shuffledChoices.Add(choices[t]);
+            }
+            return shuffledChoices;
+        }
+
     }
 }
