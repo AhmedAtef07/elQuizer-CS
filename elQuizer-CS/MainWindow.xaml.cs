@@ -25,6 +25,7 @@ namespace elQuizer_CS
         public MainWindow()
         {
             InitializeComponent();
+            QuestionBank.questions = QuestionBank.parseQuestions(Elfile.load(@"C:\Users\Ahmed\Documents\test02.qbank"));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -47,6 +47,10 @@ namespace elQuizer_CS
         {
             return questionType;
         }
+        public AnswerType getAnswerType()
+        {
+            return answerType;
+        }
         public int getQuestionTypeValue()
         {
             return (int)questionType;
@@ -73,6 +77,10 @@ namespace elQuizer_CS
         {
             return getQuestionTypeValue() + "," + getQuestion() + "," 
                 + getAnswer();
+        }
+        public virtual string getMessage()
+        {
+            throw new NotImplementedException();
         }
     }
 }

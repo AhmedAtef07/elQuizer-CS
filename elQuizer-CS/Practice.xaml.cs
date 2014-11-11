@@ -22,6 +22,8 @@ namespace elQuizer_CS
         int questionsCount,
             currQuestionIndex;
         Rectangle[] rects;
+        TextBox textAnswer;
+        StackPanel choices_sp;
         public Practice()
         {
             InitializeComponent();
@@ -72,27 +74,136 @@ namespace elQuizer_CS
         }
         void showQuestion(int questionIndex)
         {
-            question_txt.Text = QuestionBank.questions[currQuestionIndex].getQuestion();
+            Question question = QuestionBank.questions[currQuestionIndex];
+            question_txt.Text = question.getQuestion();
 
-            question_message_txt.Text = QuestionBank.questions[currQuestionIndex].getQuestionTypeValue().ToString();
+            question_message_txt.Text = question.getMessage();
 
-            question_order_txt.Content = "Answer";
-            //<TextBox x:Name="mutli_txt" Grid.Column="1" VerticalAlignment="Stretch" MaxLength="100" VerticalContentAlignment="Center" Margin="0,0,7,0"></TextBox>
+            answer_grid.Children.RemoveAt(1);
+            switch (question.getAnswerType())
+            {
+                case Question.AnswerType.Text:
+                    question_order_txt.Content = "Answer:";
 
+                    textAnswer = new TextBox();
+                    textAnswer.VerticalAlignment = VerticalAlignment.Stretch;
+                    textAnswer.MaxLength = 100;
+                    textAnswer.VerticalContentAlignment = VerticalAlignment.Center;
+                    textAnswer.Margin = new Thickness(0, 0, 7, 0);
+                    Grid.SetColumn(textAnswer, 1);
+                    answer_grid.Children.Add(textAnswer);
+                    break;
+                case Question.AnswerType.Choice:
+                    question_order_txt.Content = "Choose:";
+
+                    choices_sp = new StackPanel();
+                    choices_sp.VerticalAlignment = VerticalAlignment.Center;
+                    choices_sp.Margin = new Thickness(10, 10, 0, 0);
+                    List<string> choices = new List<string>();
+                    switch (question.getQuestionType())
+	                {
+                        case Question.QuestionType.TrueFalse:
+                            choices = ((TrueFalseQuestion)question).getChoices();
+                            break;
+                        case Question.QuestionType.MutliChoice:
+                            choices = ((MutliChoiceQuestion)question).getShuffledChoices();
+                            break;
+                        default:
+                            break;
+	                }                     
+                    for (int i = 0; i < choices.Count; i++)
+                    {
+                        RadioButton NewChoice = new RadioButton();
+                        NewChoice.Margin = new Thickness(0, 0, 0, 7);
+                        NewChoice.Content = choices[i];
+                        choices_sp.Children.Add(NewChoice);
+                    }
+                        
+                    Grid.SetColumn(choices_sp, 1);
+                    answer_grid.Children.Add(choices_sp);
+                    break;
+                default:
+                    break;
+            }
+            
+            
         }
 
         private void action_btn_Click(object sender, RoutedEventArgs e)
         {
-            Color[] col = new Color[2];
-            //col[0] = Colors.Red;
-            col[0] = Color.FromArgb(0xFF, 0xCB, 0x36, 0x36);
-            //col[1] = Colors.Green;
-            col[1] = Color.FromArgb(0xFF, 0x36, 0xCB, 0x3C);
-            Random rand = new Random();
-            rects[currQuestionIndex].Fill = new SolidColorBrush(col[rand.Next(2)]);
+            int answerState = checkAnswer();
+            switch (answerState)
+            {
+                case -1:
+                    return;
+                case 0:
+                    // Red.
+                    rects[currQuestionIndex].Fill = new SolidColorBrush(Color.FromArgb(0xFF, 0xCB, 0x36, 0x36));
+                    break;
+                case 1:
+                    // Green.
+                    rects[currQuestionIndex].Fill = new SolidColorBrush(Color.FromArgb(0xFF, 0x36, 0xCB, 0x3C));
+                    break;
+                default:
+                    break;
+            }
             currQuestionIndex++;
-            showQuestion(currQuestionIndex);
+            if (currQuestionIndex == questionsCount)
+            {
+                ((Button)sender).IsEnabled = false;
+            }
+            else
+            {
+                showQuestion(currQuestionIndex);
 
+            }
+
+        }
+        int checkAnswer()
+        {
+            //QuestionBank.questions[currQuestionIndex].checkAnswer()
+            Question question = QuestionBank.questions[currQuestionIndex];
+            switch (question.getAnswerType())
+            {
+                case Question.AnswerType.Text:
+                    if (textAnswer.Text == "")
+                    {
+                        MessageBox.Show("Where is the answer?");
+                        return -1;
+                    }
+                    return question.checkAnswer(textAnswer.Text)?1:0;
+                case Question.AnswerType.Choice:                    
+                    switch (question.getQuestionType())
+	                {
+                        case Question.QuestionType.TrueFalse:
+                            for (int i = 0; i < choices_sp.Children.Count; i++)
+                            {
+                                if (((RadioButton)choices_sp.Children[i]).IsChecked == true)
+                                {
+                                    return question.checkAnswer(((RadioButton)choices_sp.Children[i]).Content.ToString() == "True")?1:0;
+                                }
+                            }
+                            MessageBox.Show("Pick a choice!");
+                            return -1;
+                        case Question.QuestionType.MutliChoice:
+                            for (int i = 0; i < choices_sp.Children.Count; i++)
+                            {
+                                if (((RadioButton)choices_sp.Children[i]).IsChecked == true)
+                                {
+                                    return question.checkAnswer(((RadioButton)choices_sp.Children[i]).Content.ToString())?1:0;
+                                }
+                            }
+                            MessageBox.Show("Pick a choice!");
+                            return -1;
+                        default:
+                            break;
+	                }                     
+                    
+                    break;
+                default:
+                    break;
+            }
+            return -1;
         }
 
     }

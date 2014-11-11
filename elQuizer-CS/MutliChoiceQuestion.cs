@@ -12,7 +12,7 @@ namespace elQuizer_CS
         int answerIndex;
         public MutliChoiceQuestion(string question, int answer,
             List<String> choices) : base(question, choices[answer], 
-                               QuestionType.MutliChoice)
+                               QuestionType.MutliChoice, AnswerType.Choice)
         {
             this.choices = choices;
             answerIndex = answer;
@@ -30,7 +30,7 @@ namespace elQuizer_CS
             Random rand = new Random();
             for (int i = 0, t = rand.Next(choices.Count); i < choices.Count;
                  ++i) {
-                while (!isVis[t]) {
+                while (isVis[t]) {
                     t = rand.Next(choices.Count);
                 }
                 isVis[t] = true;
@@ -45,5 +45,9 @@ namespace elQuizer_CS
                 + answerIndex + "," + string.Join(",", choices.ToArray());
         }
 
+        public override string getMessage()
+        {
+            return "Choose the correct answer.";
+        }
     }
 }

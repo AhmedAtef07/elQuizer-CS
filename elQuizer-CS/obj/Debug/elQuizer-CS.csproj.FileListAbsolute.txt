@@ -17,3 +17,5 @@ E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\QuestionsManager.baml
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\QuestionsManager.g.cs
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\Practice.baml
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\Practice.g.cs
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\QuizModel.baml
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\QuizModel.g.cs

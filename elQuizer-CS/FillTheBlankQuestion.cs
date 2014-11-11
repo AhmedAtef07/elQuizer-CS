@@ -12,7 +12,7 @@ namespace elQuizer_CS
         private string[] questionTokens;
         private int answerIndex;
         public FillTheBlankQuestion(string question, int answer)
-            : base(question, null, QuestionType.FillTheBlank) 
+            : base(question, null, QuestionType.FillTheBlank, AnswerType.Text) 
         {
             question = question.Trim();
             this.questionTokens = Regex.Split(question, @"\s+");
@@ -39,6 +39,11 @@ namespace elQuizer_CS
         {
             return getQuestionTypeValue() + "," + base.getQuestion() + ","
                 + answerIndex;
+        }
+
+        public override string getMessage()
+        {
+            return "Fill the blank.";
         }
     
     }
