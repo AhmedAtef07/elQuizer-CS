@@ -39,5 +39,11 @@ namespace elQuizer_CS
             QuestionsManager questionsManager = new QuestionsManager();
             questionsManager.ShowDialog();
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Practice practice = new Practice();
+            practice.ShowDialog();
+        }
     }
 }

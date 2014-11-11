@@ -1,0 +1,31 @@
+﻿<Window x:Class="elQuizer_CS.Practice"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Practice" Height="332.707" Width="433.083">
+    <Grid Margin="7">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Grid Name="progress_grid" Margin="0,0,0,7"></Grid>
+            <TextBlock Text="Question goes here..." Padding="7" Background="#FF0080FF" Name="question_txt" Margin="0,0,0,7" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="18"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Fill the blanks." Name="question_message_txt" Margin="7,0,7,0" FontSize="14" FontStyle="Italic" FontWeight="Bold"/>
+                <Grid Margin="7" Grid.Row="1" Name="answer_grid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Answer:" HorizontalAlignment="Left" VerticalAlignment="Top" Name="question_order_txt"/>
+                    <TextBox x:Name="mutli_txt" Grid.Column="1" VerticalAlignment="Stretch" MaxLength="100" VerticalContentAlignment="Center" Margin="0,0,7,0"></TextBox>
+                </Grid>
+            </Grid>
+        </StackPanel>
+        <Button Grid.Row="1" Margin="0,7,0,0" Height="27" Name="action_btn" Click="action_btn_Click">Check Answer</Button>
+    </Grid>
+</Window>

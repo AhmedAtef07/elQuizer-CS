@@ -15,3 +15,5 @@ E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS.exe
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS.pdb
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\QuestionsManager.baml
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\QuestionsManager.g.cs
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\Practice.baml
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\Practice.g.cs

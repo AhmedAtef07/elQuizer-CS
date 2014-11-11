@@ -15,15 +15,22 @@ namespace elQuizer_CS
             TrueFalse = 2,
             MutliChoice = 3,
         }
+        public enum AnswerType
+        {
+            Text = 0,
+            Choice = 1,
+        }
         string question;
         object answer;
         QuestionType questionType;
+        AnswerType answerType;
         public Question(string question, object answer,
-                        QuestionType questionType)
+                        QuestionType questionType, AnswerType answerType)
         {
             this.question = question;
             this.answer = answer;
             this.questionType = questionType;
+            this.answerType = answerType;
         }
 
         public virtual string getQuestion()
