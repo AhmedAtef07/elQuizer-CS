@@ -3,9 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="QuestionsManager" Height="359.774" Width="690.225" WindowStartupLocation="CenterScreen">
     <Grid>
-        <ListBox x:Name="question_list" HorizontalAlignment="Left" Width="296" Margin="10,10,0,10"/>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="384,101,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <Button Content="Load" HorizontalAlignment="Left" Margin="384,149,0,0" VerticalAlignment="Top" Width="75" Click="load_btn_click"/>
+        <ListBox x:Name="question_list" HorizontalAlignment="Left" Width="296" Margin="203,47,0,10"/>
+        <Button Content="Save Current List" HorizontalAlignment="Left" Margin="531,150,0,0" VerticalAlignment="Top" Width="134" Click="Button_Click"/>
+        <Button Content="Import External List" HorizontalAlignment="Left" Margin="531,175,0,0" VerticalAlignment="Top" Width="134" Click="load_btn_click"/>
+        <ListBox Name="dirs_list" Margin="10,47,484,10"/>
+        <Label Content="Available Directories"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,16,0,0" Width="188"/>
+        <Label Content="Currunt Question List" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="203,16,0,0" Width="296"/>
+        <Button Content="Clear Currunt List" HorizontalAlignment="Left" Margin="531,200,0,0" VerticalAlignment="Top" Width="134" Click="clear_btn_click"/>
 
     </Grid>
 </Window>

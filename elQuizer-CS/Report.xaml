@@ -1,7 +1,7 @@
 ﻿<Window x:Class="elQuizer_CS.Report"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Report" Height="300" Width="300">
+        Title="Report" Height="384.586" Width="406.015">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -9,7 +9,7 @@
         </Grid.RowDefinitions>
         <ScrollViewer ScrollViewer.CanContentScroll="True">
             <StackPanel Margin="0,0,0,0" Name="table_sp">
-            
+
             </StackPanel>
         </ScrollViewer>
 
@@ -18,11 +18,11 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Margin="2">Save</Button>
-            <Button Grid.Column="1" Margin="2">Close</Button>
+            <Button Name="save_btn" Margin="2" Click="save_btn_Click">Save</Button>
+            <Button Name="home_btn" Grid.Column="1" Margin="2,0,2,2" Height="23" VerticalAlignment="Bottom" Click="home_btn_Click">Back to Main Menu</Button>
         </Grid>
-        <StackPanel Grid.Row="1" Orientation="Horizontal"> 
-            
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+
         </StackPanel>
 
     </Grid>

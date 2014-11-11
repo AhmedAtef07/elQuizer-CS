@@ -10,6 +10,7 @@ namespace elQuizer_CS
 {
     class Elfile
     {
+        public static List<string> savedPaths = new List<string>();
         static public string[] load()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -45,6 +46,22 @@ namespace elQuizer_CS
                 return true;
             }
             return false;
+        }
+
+        public static void getPaths()
+        {
+            string dataDir = Directory.GetCurrentDirectory() + @"\eldata";
+            if (Directory.Exists(dataDir))
+            {
+                savedPaths = Directory.GetFiles(dataDir).ToList();                
+            }
+            else
+            {
+                Directory.CreateDirectory(dataDir);
+            }
+            //string currDir = Directory.GetCurrentDirectory();
+            //Directory.Exists("")
+
         }
     }
 }

@@ -24,6 +24,6 @@
                 <TextBox Grid.Column="1" VerticalAlignment="Stretch" MaxLength="100" VerticalContentAlignment="Center" Margin="0,0,7,0"></TextBox>
             </Grid>
         </StackPanel>
-        <Button Grid.Row="1" Margin="0,7,0,0" Height="27" Name="action_btn" Click="action_btn_Click">Check Answer (Ctrl + ↵)</Button>
+        <Button Grid.Row="1" Margin="0,7,0,0" Height="27" Name="action_btn" Click="action_btn_Click">Submit Answer (Ctrl + ↵)</Button>
     </Grid>
 </Window>

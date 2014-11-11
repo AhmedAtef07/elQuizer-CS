@@ -25,6 +25,7 @@ namespace elQuizer_CS
         public MainWindow()
         {
             InitializeComponent();
+            Elfile.getPaths();
             QuestionBank.questions = QuestionBank.parseQuestions(Elfile.load(@"C:\Users\Ahmed\Documents\test02.qbank"));
         }
 
@@ -45,6 +46,12 @@ namespace elQuizer_CS
         {
             Practice practice = new Practice();
             practice.ShowDialog();
+        }
+
+        private void quiz_btn_click(object sender, RoutedEventArgs e)
+        {
+            Quiz quiz = new Quiz();
+            quiz.ShowDialog();
         }
     }
 }

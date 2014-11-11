@@ -26,17 +26,20 @@ namespace elQuizer_CS
         {
             InitializeComponent();
             fillQuestionList();
+            fillPathList();
+        }
+
+        private void fillPathList()
+        {
+            foreach (string item in Elfile.savedPaths)
+            {
+                
+            }
         }
         void fillQuestionList()
         {            
             foreach (var question in QuestionBank.questions)
             {
-                //string s = "";
-                //s += item.ToString() + '\n';
-                //s += item.getQuestion() + '\n';
-                //s += item.getAnswer().ToString();
-                //question_list.Items.Add(s);
-
                 question_list.Items.Add(question.getFileLineString());
             }
         }
@@ -58,16 +61,20 @@ namespace elQuizer_CS
 
         private void load_btn_click(object sender, RoutedEventArgs e)
         {
-            lines = Elfile.load(@"C:\Users\Ahmed\Documents\test02.qbank");
-            if (lines == null)
+            lines = Elfile.load();
+            if (lines != null)
             {
-                MessageBox.Show("Unable to locate the file.");
-                lines = Elfile.load();
+                QuestionBank.questions = QuestionBank.parseQuestions(lines);
+                MessageBox.Show("File loaded.");                
+                fillQuestionList();
             }
-            QuestionBank.questions = QuestionBank.parseQuestions(lines);
-            MessageBox.Show("File loaded.");
-            fillQuestionList();
             
+        }
+
+        private void clear_btn_click(object sender, RoutedEventArgs e)
+        {
+            QuestionBank.questions.Clear();
+            fillQuestionList();
         }
         
     }

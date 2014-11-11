@@ -56,9 +56,12 @@ namespace elQuizer_CS
 
         void prepareStage()
         {
+            QuestionBank.shuffleQuestions();
+
             Report.userAnswers.Clear();
+            Report.userBooleans.Clear();
             currQuestionIndex = 0;
-            questionsCount = QuestionBank.questions.Count;
+            questionsCount = QuestionBank.shuffledQuestions.Count;
             action_btn.Tag = "0";
             practiceFinished = false;
             setProgressGrid();
@@ -87,7 +90,7 @@ namespace elQuizer_CS
         }
         void showQuestion(int questionIndex)
         {
-            currQuestion = QuestionBank.questions[currQuestionIndex];
+            currQuestion = QuestionBank.shuffledQuestions[currQuestionIndex];
             question_txt.Text = currQuestion.getQuestion();
 
             question_message_txt.Text = currQuestion.getMessage();
@@ -159,9 +162,11 @@ namespace elQuizer_CS
                         return;
                     case 0:
                         falseAnswer();
+                        Report.userBooleans.Add(false);
                         break;
                     case 1:
                         trueAnswer();
+                        Report.userBooleans.Add(true);
                         break;
                     default:
                         break;
@@ -172,7 +177,7 @@ namespace elQuizer_CS
                
                 if (currQuestionIndex + 1 == questionsCount)
                 {
-                    action_btn.Content = "Finish and Check Results";
+                    action_btn.Content = "Finish and Check Results (Ctrl + ↵)";
                     practiceFinished = true;
                 }
                 else
@@ -191,6 +196,7 @@ namespace elQuizer_CS
                     Report report = new Report();
                     this.Close();
                     report.ShowDialog();
+                    return;
                 }
                 else
                 {

@@ -20,6 +20,7 @@ namespace elQuizer_CS
     public partial class Report : Window
     {
         public static List<string> userAnswers = new List<string>();
+        public static List<bool> userBooleans = new List<bool>();
         string lines;
         public Report()
         {
@@ -45,10 +46,10 @@ namespace elQuizer_CS
             for (int i = 0; i < 3; i++)
             {
                 ColumnDefinition cd = new ColumnDefinition();
-                if (i != 0)
-                {
-                    cd.Width = GridLength.Auto;
-                }
+                //if (i != 0)
+                //{
+                //    cd.Width = GridLength.Auto;
+                //}
                 grid.ColumnDefinitions.Add(cd);
                 labels[i] = new Label();
                 labels[i].VerticalContentAlignment = VerticalAlignment.Center;
@@ -58,24 +59,20 @@ namespace elQuizer_CS
                 grid.Children.Add(labels[i]);
             }
 
-            labels[0].Content = QuestionBank.questions[index].getQuestion();
-            labels[1].Content = QuestionBank.questions[index].getAnswer();
+            labels[0].Content = QuestionBank.shuffledQuestions[index].getQuestion();
+            labels[1].Content = QuestionBank.shuffledQuestions[index].getAnswer();
             labels[2].Content = userAnswers[index];
-
-            bool isCorrect;
-            if (QuestionBank.questions[index].checkAnswer(
-                labels[2].Content.ToString())) {
+            
+            if (userBooleans[index]) {
                 labels[2].Background = new SolidColorBrush(Practice.successColor);
-                isCorrect = true;
             }
             else {
                 labels[2].Background = new SolidColorBrush(Practice.failurColor);
-                isCorrect = false;
             }
             lines += labels[0].Content.ToString() + ',' +
                      labels[1].Content.ToString() + ',' +
                      labels[2].Content.ToString() + ',' +
-                     (isCorrect?"Correct":"Wrong") + '\n';
+                     (userBooleans[index] ? "Correct" : "Wrong") + "\n";
 
             return grid;
         }

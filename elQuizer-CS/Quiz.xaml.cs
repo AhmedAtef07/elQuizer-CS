@@ -53,12 +53,14 @@ namespace elQuizer_CS
                 }                
             }
         }
-
+        
         void prepareStage()
         {
+            QuestionBank.shuffleQuestions();
             Report.userAnswers.Clear();
+            Report.userBooleans.Clear();
             currQuestionIndex = 0;
-            questionsCount = QuestionBank.questions.Count;
+            questionsCount = QuestionBank.shuffledQuestions.Count;
             action_btn.Tag = "0";
             quizFinished = false;
             setProgressGrid();
@@ -87,7 +89,7 @@ namespace elQuizer_CS
         }
         void showQuestion(int questionIndex)
         {
-            currQuestion = QuestionBank.questions[currQuestionIndex];
+            currQuestion = QuestionBank.shuffledQuestions[currQuestionIndex];
             question_txt.Text = currQuestion.getQuestion();
 
             question_message_txt.Text = currQuestion.getMessage();
@@ -149,98 +151,49 @@ namespace elQuizer_CS
         }
 
         private void action_btn_Click(object sender, RoutedEventArgs e)
-        {
-            if (action_btn.Tag.ToString() == "0")
-            {                
-                int answerState = checkAnswer();
-                switch (answerState)
-                {
-                    case -1:
-                        return;
-                    case 0:
-                        falseAnswer();
-                        break;
-                    case 1:
-                        trueAnswer();
-                        break;
-                    default:
-                        break;
-                }
-                // Must change the tag here in case the answer was not valied.
-                action_btn.Tag = "1";
-
-               
-                if (currQuestionIndex + 1 == questionsCount)
-                {
-                    action_btn.Content = "Finish and Check Results";
-                    quizFinished = true;
-                }
-                else
-                {
-                    action_btn.Content = "Next Question";
-                }
-                action_btn.Focus();
-
-            }
-            else
-            {                
-                currQuestionIndex++;
-                if (currQuestionIndex == questionsCount)
-                {
-                    // New Window
-                    Report report = new Report();
-                    this.Close();
-                    report.ShowDialog();
-                }
-                else
-                {
-                    showQuestion(currQuestionIndex);
-                    action_btn.Content = "Check Answer (Ctrl + ↵)";
-                }
-                action_btn.Tag = "0";
-            }
-
-        }
-        void trueAnswer()
-        {
-            rects[currQuestionIndex].Fill = new SolidColorBrush(successColor);
-            switch (currQuestion.getAnswerType())
+        {                         
+            int answerState = checkAnswer();
+            switch (answerState)
             {
-                case Question.AnswerType.Text:
-                    textAnswer.Background = new SolidColorBrush(successColor);
+                case -1:
+                    return;
+                case 0:
+                    falseAnswer();
+                    Report.userBooleans.Add(false);
                     break;
-                case Question.AnswerType.Choice:
-                    RadioButton radio = getCheckedRadioButton();
-                    radio.Background = new SolidColorBrush(successColor);
-                    radio.Foreground = new SolidColorBrush(successColor); 
+                case 1:
+                    trueAnswer();
+                    Report.userBooleans.Add(true);
                     break;
                 default:
                     break;
             }
+            currQuestionIndex++;
+
+            if (currQuestionIndex == questionsCount)
+            {
+                quizFinished = true;
+                Report report = new Report();
+                this.Close();
+                report.ShowDialog();
+                return;
+            }
+
+            if (currQuestionIndex + 1 == questionsCount)
+            {
+                action_btn.Content = "Submit and Check Correct Answers (Ctrl + ↵)";                    
+            }
+            
+            showQuestion(currQuestionIndex);
+        }
+        void trueAnswer()
+        {
+            rects[currQuestionIndex].Fill = new SolidColorBrush(successColor);
            
         }
         void falseAnswer()
         {
             rects[currQuestionIndex].Fill = new SolidColorBrush(failurColor);
-            switch (currQuestion.getAnswerType())
-            {
-                case Question.AnswerType.Text:
-                    textAnswer.Background = new SolidColorBrush(failurColor);
-                    showCorrectTextAnswer();
-                    break;
-                case Question.AnswerType.Choice:
-                    RadioButton checkedRadio = getCheckedRadioButton();
-                    checkedRadio.Background = new SolidColorBrush(failurColor);
-                    checkedRadio.Foreground = new SolidColorBrush(failurColor); 
-                    RadioButton correctRadio = getCorrectAnswerRadioButton();
-                    correctRadio.Background = 
-                        new SolidColorBrush(successColor);
-                    correctRadio.Foreground = 
-                        new SolidColorBrush(successColor); 
-                    break;
-                default:
-                    break;
-            }
         }
         int checkAnswer()
         {
@@ -305,40 +258,6 @@ namespace elQuizer_CS
                 }
             }
             return null;
-        }
-
-        RadioButton getCorrectAnswerRadioButton()
-        {
-            string answer = currQuestion.getAnswer().ToString().ToLower();
-            for (int i = 0; i < choices_sp.Children.Count; ++i)
-            {
-                if (((RadioButton)choices_sp.Children[i]
-                    ).Content.ToString().ToLower() == answer)
-                {
-                    return (RadioButton)choices_sp.Children[i];
-                }
-            }
-            return null;
-        }
-
-        void showCorrectTextAnswer()
-        {
-            Label label = new Label();
-            label.Content = "Correct Answer:";
-            Grid.SetRow(label, 1);
-            answer_grid.Children.Add(label);
-
-            TextBox rightAnswer = new TextBox();
-            rightAnswer.Text = currQuestion.getAnswer().ToString();
-            rightAnswer.Background = new SolidColorBrush(successColor);
-            rightAnswer.VerticalAlignment = VerticalAlignment.Stretch;
-            rightAnswer.VerticalContentAlignment = (
-                VerticalAlignment.Center);
-            rightAnswer.Margin = new Thickness(0, 3, 7, 0);
-            rightAnswer.Height = 27;
-            Grid.SetColumn(rightAnswer, 1);
-            Grid.SetRow(rightAnswer, 1);
-            answer_grid.Children.Add(rightAnswer);
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)

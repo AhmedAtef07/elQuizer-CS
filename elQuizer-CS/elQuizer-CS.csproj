@@ -67,6 +67,9 @@
     <Compile Include="QuestionsManager.xaml.cs">
       <DependentUpon>QuestionsManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Quiz.xaml.cs">
+      <DependentUpon>Quiz.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Report.xaml.cs">
       <DependentUpon>Report.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="QuestionsManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Quiz.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

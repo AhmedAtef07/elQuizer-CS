@@ -9,6 +9,24 @@ namespace elQuizer_CS
     class QuestionBank
     {
         public static List<Question> questions = new List<Question>();
+        public static List<Question> shuffledQuestions = new List<Question>();
+
+        public static void shuffleQuestions()
+        {
+            shuffledQuestions.Clear();
+            int count = questions.Count;
+            bool[] isVis = new bool[count];
+            Random rand = new Random();
+            for (int i = 0, t = rand.Next(count); i < count; ++i)
+            {
+                while (isVis[t])
+                {
+                    t = rand.Next(count);
+                }
+                isVis[t] = true;
+                shuffledQuestions.Add(questions[t]);
+            }
+        }
         public static List<Question> parseQuestions(string[] lines)
         {
             List<Question> questionList = new List<Question>();
@@ -44,6 +62,7 @@ namespace elQuizer_CS
                         break;
                 }
             }
+            shuffleQuestions();
             return questionList;
         }
         private static List<string> getChoices(string[] lineTokens)
