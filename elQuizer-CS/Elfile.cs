@@ -31,5 +31,20 @@ namespace elQuizer_CS
             }
             return null;
         }
+
+        static public bool saveAsText(string s)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text File|*.txt";
+            saveFileDialog.Title = "Save your data";
+            saveFileDialog.ShowDialog();
+
+            if (saveFileDialog.FileName != "")
+            {
+                File.WriteAllText(saveFileDialog.FileName, s);
+                return true;
+            }
+            return false;
+        }
     }
 }

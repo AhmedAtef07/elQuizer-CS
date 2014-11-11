@@ -64,7 +64,7 @@ namespace elQuizer_CS
             if (answer is String)
             {
                 return (((string)this.answer).ToLower() ==
-                       ((string)answer).ToLower());
+                       ((string)answer).ToLower().Trim());
             }
             return this.answer.Equals(answer);
         }

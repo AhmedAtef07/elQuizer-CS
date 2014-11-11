@@ -15,14 +15,14 @@ using System.Windows.Shapes;
 namespace elQuizer_CS
 {
     /// <summary>
-    /// Interaction logic for Practice.xaml
+    /// Interaction logic for Quiz.xaml
     /// </summary>
-    public partial class Practice : Window
+    public partial class Quiz : Window
     {
         // Red.
-        public static Color failurColor = Color.FromArgb(0xFF, 0xCB, 0x36, 0x36);
+        Color failurColor = Practice.failurColor;
         // Green.
-        public static Color successColor = Color.FromArgb(0xFF, 0x36, 0xCB, 0x3C);
+        Color successColor = Practice.successColor;
 
         int questionsCount,
             currQuestionIndex;
@@ -30,8 +30,8 @@ namespace elQuizer_CS
         TextBox textAnswer;
         StackPanel choices_sp;
         Question currQuestion;
-        bool practiceFinished;
-        public Practice()
+        bool quizFinished;
+        public Quiz()
         {
             InitializeComponent();
             this.Closing += new System.ComponentModel.CancelEventHandler(
@@ -42,7 +42,7 @@ namespace elQuizer_CS
         private void MyWindow_Closing(object sender, 
             System.ComponentModel.CancelEventArgs e)
         {
-            if (!practiceFinished)
+            if (!quizFinished)
             {
                 MessageBoxResult result =  MessageBox.Show(
                     "You really want to close?", "Escaping?",
@@ -60,7 +60,7 @@ namespace elQuizer_CS
             currQuestionIndex = 0;
             questionsCount = QuestionBank.questions.Count;
             action_btn.Tag = "0";
-            practiceFinished = false;
+            quizFinished = false;
             setProgressGrid();
             showQuestion(0);
         }
@@ -173,7 +173,7 @@ namespace elQuizer_CS
                 if (currQuestionIndex + 1 == questionsCount)
                 {
                     action_btn.Content = "Finish and Check Results";
-                    practiceFinished = true;
+                    quizFinished = true;
                 }
                 else
                 {
