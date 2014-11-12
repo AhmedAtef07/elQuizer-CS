@@ -11,6 +11,7 @@ namespace elQuizer_CS
     class ElFile
     {
         public static List<string> savedPaths = new List<string>();
+        private static string dataDir = Directory.GetCurrentDirectory() + @"\eldata";
         static public string[] load()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -45,7 +46,6 @@ namespace elQuizer_CS
 
         static public string getLastAccessedFile()
         {
-            string dataDir = Directory.GetCurrentDirectory() + @"\eldata";
             if (Directory.Exists(dataDir))
             {
                 string[] files = Directory.GetFiles(dataDir);
@@ -66,7 +66,25 @@ namespace elQuizer_CS
             return null;
         }
 
-        static public bool saveAsText(string s)
+        public static void duplicate(string filename)
+        {
+
+            File.Copy(dataDir + "\\" + filename + ".qbank",
+                      dataDir + "\\" + filename + " - Copy.qbank", 
+                      true);
+        }
+        public static void delete(string filename)
+        {
+            File.Delete(dataDir + "\\" + filename + ".qbank");
+        }
+        public static void rename(string oldFilename, string newFilename)
+        {
+            File.Copy(dataDir + "\\" + oldFilename,
+                      dataDir + "\\" + newFilename);
+            delete(oldFilename);
+        }
+
+        static public bool saveAsText(string content)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Text File|*.txt";
@@ -75,19 +93,37 @@ namespace elQuizer_CS
 
             if (saveFileDialog.FileName != "")
             {
-                File.WriteAllText(saveFileDialog.FileName, s);
+                File.WriteAllText(saveFileDialog.FileName, content);
                 return true;
             }
             return false;
         }
 
-        public static void save()
+        public static void save(string filename)
         {
+            // Check if user removed directory while the program is running.
+            File.WriteAllText(dataDir + "\\" + filename,
+                string.Join("\n", ElTools.getQuestionFileLines().ToArray()));            
+        }
 
+        public static bool export()
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Question Bank|*.qbank";
+            saveFileDialog.Title = "Save Question Bank";
+            saveFileDialog.ShowDialog();
+
+            if (saveFileDialog.FileName != "")
+            {
+                File.WriteAllText(saveFileDialog.FileName,
+                    string.Join(
+                    "\n", ElTools.getQuestionFileLines().ToArray()));
+                return true;
+            }
+            return false;
         }
         public static void getLocalPaths()
         {
-            string dataDir = Directory.GetCurrentDirectory() + @"\eldata";
             if (Directory.Exists(dataDir))
             {
                 savedPaths = Directory.GetFiles(dataDir).ToList();                

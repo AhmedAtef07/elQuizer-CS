@@ -14,16 +14,17 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Label Content="Available Question Lists"  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" />
-        <ListBox Name="dirs_list" Grid.Row="1" Grid.Column="0" Margin="0,7,0,0" SelectionChanged="dirs_list_SelectionChanged"/>
+        <ListBox Name="dirs_list" Grid.Row="1" Grid.Column="0" MaxWidth="300" Margin="0,7,0,0" SelectionChanged="dirs_list_SelectionChanged"/>
 
         <Label x:Name="list_name_txt" Grid.Row="0" Grid.Column="1" Margin="7,0,0,0" HorizontalContentAlignment="Center">List Name Here</Label>
         <ListBox x:Name="question_list"  Grid.Row="1" Grid.Column="1" Margin="7,7,0,0"/>
 
-        <StackPanel Grid.Row="1" Grid.Column="2" Margin="7" Width="180">
+        <StackPanel Grid.Row="1" Grid.Column="2" Margin="7,7,0,7" Width="180">
             <Button Content="Export Current List" Margin="0,0,0,7" Height="27" Click="Button_Click"/>
             <Button Content="Import External List"  Margin="0,0,0,7" Height="27" Click="load_btn_click"/>
             <Button Content="Clear Currunt List"  Margin="0,0,0,7" Height="27" Click="clear_btn_click"/>
-            <Button Content="Save Current List"  Margin="0,0,0,7" Height="27"  Click="save_btn_click"/>
+            <Button Content="Duplicate Selected List"  Margin="0,0,0,7" Height="27"  Click="duplicate_btn_click"/>
+            <Button Content="Delete Selected List"  Margin="0,0,0,7" Height="27"  Click="delete_btn_click"/>
         </StackPanel>
 
     </Grid>

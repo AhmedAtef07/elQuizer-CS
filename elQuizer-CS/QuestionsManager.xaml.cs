@@ -27,6 +27,7 @@ namespace elQuizer_CS
             ElFile.getLocalPaths();
             fillQuestionList();
             fillPathList();
+            ElFile.getLastAccessedFile();
             selectListItem(0);
         }
 
@@ -36,19 +37,28 @@ namespace elQuizer_CS
             dirs_list.Items.Clear();
             foreach (string path in ElFile.savedPaths)
             {
-                string[] token = path.Split('\\');
-                string fileName = token[token.Length - 1];
-                string[] fileNameTokens = fileName.Split('.');
-                if (fileNameTokens[fileNameTokens.Length - 1] != "qbank" ||
-                    fileNameTokens.Length == 1)
+                string fileName = cleanFileName(path);
+                if (fileName == null)
                 {
                     continue;
                 }
                 Label fileName_lbl = new Label();
-                fileName_lbl.Content = fileName.Replace(".qbank", "");
+                fileName_lbl.Content = fileName;
                 fileName_lbl.Tag = path;
                 dirs_list.Items.Add(fileName_lbl);
             }            
+        }
+        string cleanFileName(string fullPath)
+        {
+            string[] token = fullPath.Split('\\');
+            string fileName = token[token.Length - 1];
+            string[] fileNameTokens = fileName.Split('.');
+            if (fileNameTokens[fileNameTokens.Length - 1] != "qbank" ||
+                fileNameTokens.Length == 1)
+            {
+                return null;
+            }
+            return fileName.Replace(".qbank", "");
         }
         void selectListItem(int index)
         {
@@ -67,18 +77,10 @@ namespace elQuizer_CS
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {                    
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Question Bank|*.qbank";
-            saveFileDialog.Title = "Save Question Bank";
-            saveFileDialog.ShowDialog();
-
-            if (saveFileDialog.FileName != "")
+        {
+            if (ElFile.export())
             {
-                File.WriteAllText(saveFileDialog.FileName,
-                    string.Join(
-                    "\n", ElTools.getQuestionFileLines().ToArray()));
-                MessageBox.Show("File Saved.");
+                MessageBox.Show("File saved.");
                 fillPathList();
             }
         }  
@@ -109,6 +111,10 @@ namespace elQuizer_CS
                 item.FontWeight = FontWeights.Normal;
             }
             Label selectedLabel = (Label)listBox.SelectedItem;
+            if (selectedLabel == null)
+            {
+                return;
+            }
             selectedLabel.FontWeight = FontWeights.Bold;
 
             string[] newLines = ElFile.load(selectedLabel.Tag.ToString());
@@ -121,35 +127,18 @@ namespace elQuizer_CS
             ElTools.parseQuestions(newLines);
             fillQuestionList();
 
+        }     
+
+        private void duplicate_btn_click(object sender, RoutedEventArgs e)
+        {
+            ElFile.duplicate(((Label)dirs_list.SelectedItem).Content.ToString());
+            fillPathList();
         }
 
-        private void save_btn_click(object sender, RoutedEventArgs e)
+        private void delete_btn_click(object sender, RoutedEventArgs e)
         {
-            list_name_txt.IsEnabled = true;
-        }
-
-        private void list_name_txt_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            list_name_txt.IsEnabled = true;
-        }
-
-        private void list_name_txt_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Return)
-            {
-                TextBox box = (TextBox)sender;
-                box.IsEnabled = false;
-            }
-        }
-
-        private void list_name_txt_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            list_name_txt.IsEnabled = true;
-        }
-
-        private void list_name_txt_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            MessageBox.Show("UI");
+            ElFile.delete(((Label)dirs_list.SelectedItem).Content.ToString());
+            fillPathList();
         }
         
     }

@@ -56,6 +56,7 @@
     <Compile Include="AddNewQuestion.xaml.cs">
       <DependentUpon>AddNewQuestion.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BaseWindow.cs" />
     <Compile Include="ElFile.cs" />
     <Compile Include="FillTheBlankQuestion.cs" />
     <Compile Include="MutliChoiceQuestion.cs" />

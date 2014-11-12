@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace elQuizer_CS
 {
-    abstract class Question
+    public abstract class Question
     {
         public enum QuestionType
         {
