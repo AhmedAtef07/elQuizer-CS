@@ -21,23 +21,45 @@ namespace elQuizer_CS
     /// </summary>
     public partial class QuestionsManager : Window
     {
-        string[] lines;
         public QuestionsManager()
         {
             InitializeComponent();
+            Elfile.getLocalPaths();
             fillQuestionList();
             fillPathList();
+            selectListItem(0);
         }
 
         private void fillPathList()
         {
-            foreach (string item in Elfile.savedPaths)
+            Elfile.getLocalPaths();
+            dirs_list.Items.Clear();
+            foreach (string path in Elfile.savedPaths)
             {
-                
+                string[] token = path.Split('\\');
+                string fileName = token[token.Length - 1];
+                string[] fileNameTokens = fileName.Split('.');
+                if (fileNameTokens[fileNameTokens.Length - 1] != "qbank" ||
+                    fileNameTokens.Length == 1)
+                {
+                    continue;
+                }
+                Label fileName_lbl = new Label();
+                fileName_lbl.Content = fileName.Replace(".qbank", "");
+                fileName_lbl.Tag = path;
+                dirs_list.Items.Add(fileName_lbl);
+            }            
+        }
+        void selectListItem(int index)
+        {
+            if (dirs_list.Items.Count > 0)
+            {
+                dirs_list.SelectedIndex = index;
             }
         }
         void fillQuestionList()
-        {            
+        {
+            question_list.Items.Clear();
             foreach (var question in QuestionBank.questions)
             {
                 question_list.Items.Add(question.getFileLineString());
@@ -53,19 +75,21 @@ namespace elQuizer_CS
 
             if (saveFileDialog.FileName != "")
             {
-                File.WriteAllText(saveFileDialog.FileName, 
-                    string.Join("\n",lines.ToArray()));
-                MessageBox.Show("File Saved."); 
+                File.WriteAllText(saveFileDialog.FileName,
+                    string.Join(
+                    "\n", QuestionBank.getQuestionFileLines().ToArray()));
+                MessageBox.Show("File Saved.");
+                fillPathList();
             }
         }  
 
         private void load_btn_click(object sender, RoutedEventArgs e)
         {
-            lines = Elfile.load();
+            string[] lines = Elfile.load();
             if (lines != null)
             {
                 QuestionBank.questions = QuestionBank.parseQuestions(lines);
-                MessageBox.Show("File loaded.");                
+                MessageBox.Show("File loaded.");
                 fillQuestionList();
             }
             
@@ -75,6 +99,33 @@ namespace elQuizer_CS
         {
             QuestionBank.questions.Clear();
             fillQuestionList();
+        }
+
+        private void dirs_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox listBox = (ListBox)sender;
+            foreach (Label item in listBox.Items)
+            {
+                item.FontWeight = FontWeights.Normal;
+            }
+            Label selectedLabel = (Label)listBox.SelectedItem;
+            selectedLabel.FontWeight = FontWeights.Bold;
+
+            string[] newLines = Elfile.load(selectedLabel.Tag.ToString());
+            if (newLines == null)
+            {
+                MessageBox.Show("File not found!");
+                fillPathList();
+                return;
+            }
+            QuestionBank.questions = QuestionBank.parseQuestions(newLines);
+            fillQuestionList();
+
+        }
+
+        private void save_btn_click(object sender, RoutedEventArgs e)
+        {
+            
         }
         
     }

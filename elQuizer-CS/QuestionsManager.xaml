@@ -4,12 +4,13 @@
         Title="QuestionsManager" Height="359.774" Width="690.225" WindowStartupLocation="CenterScreen">
     <Grid>
         <ListBox x:Name="question_list" HorizontalAlignment="Left" Width="296" Margin="203,47,0,10"/>
-        <Button Content="Save Current List" HorizontalAlignment="Left" Margin="531,150,0,0" VerticalAlignment="Top" Width="134" Click="Button_Click"/>
+        <Button Content="Export Current List" HorizontalAlignment="Left" Margin="531,150,0,0" VerticalAlignment="Top" Width="134" Click="Button_Click"/>
         <Button Content="Import External List" HorizontalAlignment="Left" Margin="531,175,0,0" VerticalAlignment="Top" Width="134" Click="load_btn_click"/>
-        <ListBox Name="dirs_list" Margin="10,47,484,10"/>
-        <Label Content="Available Directories"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,16,0,0" Width="188"/>
-        <Label Content="Currunt Question List" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="203,16,0,0" Width="296"/>
+        <ListBox Name="dirs_list" Margin="10,47,484,10" SelectionChanged="dirs_list_SelectionChanged"/>
+        <Label Content="Available Question Lists"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,16,0,0" Width="188"/>
+        <Label Content="Qusetion List" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="203,16,0,0" Width="296"/>
         <Button Content="Clear Currunt List" HorizontalAlignment="Left" Margin="531,200,0,0" VerticalAlignment="Top" Width="134" Click="clear_btn_click"/>
+        <Button Content="Save Current List" HorizontalAlignment="Left" Margin="531,125,0,0" VerticalAlignment="Top" Width="134" Click="save_btn_click"/>
 
     </Grid>
 </Window>

@@ -59,7 +59,8 @@ namespace elQuizer_CS
                                                     getChoices(tokens)));
                         break;
                     default:
-                        break;
+                        // File is corrupted.
+                        return null;
                 }
             }
             shuffleQuestions();
@@ -73,6 +74,14 @@ namespace elQuizer_CS
                 choices.Add(lineTokens[i]);
             }
             return choices;
+        }
+        public static List<string> getQuestionFileLines() {
+            List<string> lines = new List<string>();
+            foreach (var item in questions)
+            {
+                lines.Add(item.getFileLineString());
+            }
+            return lines;
         }
     }
 }

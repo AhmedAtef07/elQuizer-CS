@@ -48,7 +48,11 @@ namespace elQuizer_CS
             return false;
         }
 
-        public static void getPaths()
+        public static void save()
+        {
+
+        }
+        public static void getLocalPaths()
         {
             string dataDir = Directory.GetCurrentDirectory() + @"\eldata";
             if (Directory.Exists(dataDir))
@@ -59,8 +63,6 @@ namespace elQuizer_CS
             {
                 Directory.CreateDirectory(dataDir);
             }
-            //string currDir = Directory.GetCurrentDirectory();
-            //Directory.Exists("")
 
         }
     }

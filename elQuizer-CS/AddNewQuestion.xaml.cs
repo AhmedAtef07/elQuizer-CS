@@ -20,6 +20,7 @@ namespace elQuizer_CS
     /// </summary>
     public partial class AddNewQuestion : Window
     {
+        // TODO(ahmedatef): Check for dublicate questions.
         public AddNewQuestion()
         {
             InitializeComponent();
@@ -162,7 +163,7 @@ namespace elQuizer_CS
 
             MessageBoxResult result = MessageBox.Show(
                 "Question is added.\nWant to add another?", "Added", 
-                MessageBoxButton.YesNo);
+                MessageBoxButton.YesNo,MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 AddNewQuestion addNewQuestion = new AddNewQuestion();
