@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace elQuizer_CS
 {
-    class Elfile
+    class ElFile
     {
         public static List<string> savedPaths = new List<string>();
         static public string[] load()
@@ -29,6 +29,39 @@ namespace elQuizer_CS
         {
             if (File.Exists(path)) {
                 return File.ReadAllLines(path);
+            }
+            return null;
+        }
+
+        static public void tryLoadLastAccessedFile()
+        {
+            string file = getLastAccessedFile();
+            if (file == null)
+            {
+                return;
+            }
+            ElTools.parseQuestions(ElFile.load(file));
+        }
+
+        static public string getLastAccessedFile()
+        {
+            string dataDir = Directory.GetCurrentDirectory() + @"\eldata";
+            if (Directory.Exists(dataDir))
+            {
+                string[] files = Directory.GetFiles(dataDir);
+                DateTime dt = new DateTime(1, 1, 1);
+                string lastAccessedPath = null;
+                foreach (string path in files)
+	            {
+                    DateTime currDT = File.GetLastAccessTime(path);
+                    if (DateTime.Compare(dt, currDT) < 0) 
+	                {
+                        dt = currDT;
+                        lastAccessedPath = path;
+	                } 
+		 
+	            }
+                return lastAccessedPath;
             }
             return null;
         }

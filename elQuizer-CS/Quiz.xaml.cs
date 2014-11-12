@@ -20,9 +20,9 @@ namespace elQuizer_CS
     public partial class Quiz : Window
     {
         // Red.
-        Color failurColor = Practice.failurColor;
+        Color failurColor = ElTools.failurColor;
         // Green.
-        Color successColor = Practice.successColor;
+        Color successColor = ElTools.successColor;
 
         int questionsCount,
             currQuestionIndex;
@@ -56,11 +56,11 @@ namespace elQuizer_CS
         
         void prepareStage()
         {
-            QuestionBank.shuffleQuestions();
+            ElTools.shuffleQuestions();
             Report.userAnswers.Clear();
             Report.userBooleans.Clear();
             currQuestionIndex = 0;
-            questionsCount = QuestionBank.shuffledQuestions.Count;
+            questionsCount = ElTools.shuffledQuestions.Count;
             action_btn.Tag = "0";
             quizFinished = false;
             setProgressGrid();
@@ -89,7 +89,7 @@ namespace elQuizer_CS
         }
         void showQuestion(int questionIndex)
         {
-            currQuestion = QuestionBank.shuffledQuestions[currQuestionIndex];
+            currQuestion = ElTools.shuffledQuestions[currQuestionIndex];
             question_txt.Text = currQuestion.getQuestion();
 
             question_message_txt.Text = currQuestion.getMessage();

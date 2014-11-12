@@ -24,7 +24,7 @@ namespace elQuizer_CS
         public QuestionsManager()
         {
             InitializeComponent();
-            Elfile.getLocalPaths();
+            ElFile.getLocalPaths();
             fillQuestionList();
             fillPathList();
             selectListItem(0);
@@ -32,9 +32,9 @@ namespace elQuizer_CS
 
         private void fillPathList()
         {
-            Elfile.getLocalPaths();
+            ElFile.getLocalPaths();
             dirs_list.Items.Clear();
-            foreach (string path in Elfile.savedPaths)
+            foreach (string path in ElFile.savedPaths)
             {
                 string[] token = path.Split('\\');
                 string fileName = token[token.Length - 1];
@@ -60,9 +60,9 @@ namespace elQuizer_CS
         void fillQuestionList()
         {
             question_list.Items.Clear();
-            foreach (var question in QuestionBank.questions)
+            foreach (var question in ElTools.questions)
             {
-                question_list.Items.Add(question.getFileLineString());
+                question_list.Items.Add(question.ToString());
             }
         }
 
@@ -77,7 +77,7 @@ namespace elQuizer_CS
             {
                 File.WriteAllText(saveFileDialog.FileName,
                     string.Join(
-                    "\n", QuestionBank.getQuestionFileLines().ToArray()));
+                    "\n", ElTools.getQuestionFileLines().ToArray()));
                 MessageBox.Show("File Saved.");
                 fillPathList();
             }
@@ -85,10 +85,10 @@ namespace elQuizer_CS
 
         private void load_btn_click(object sender, RoutedEventArgs e)
         {
-            string[] lines = Elfile.load();
+            string[] lines = ElFile.load();
             if (lines != null)
             {
-                QuestionBank.questions = QuestionBank.parseQuestions(lines);
+                ElTools.parseQuestions(lines);
                 MessageBox.Show("File loaded.");
                 fillQuestionList();
             }
@@ -97,7 +97,7 @@ namespace elQuizer_CS
 
         private void clear_btn_click(object sender, RoutedEventArgs e)
         {
-            QuestionBank.questions.Clear();
+            ElTools.questions.Clear();
             fillQuestionList();
         }
 
@@ -111,21 +111,45 @@ namespace elQuizer_CS
             Label selectedLabel = (Label)listBox.SelectedItem;
             selectedLabel.FontWeight = FontWeights.Bold;
 
-            string[] newLines = Elfile.load(selectedLabel.Tag.ToString());
+            string[] newLines = ElFile.load(selectedLabel.Tag.ToString());
             if (newLines == null)
             {
-                MessageBox.Show("File not found!");
+                MessageBox.Show("File disappered!");
                 fillPathList();
                 return;
             }
-            QuestionBank.questions = QuestionBank.parseQuestions(newLines);
+            ElTools.parseQuestions(newLines);
             fillQuestionList();
 
         }
 
         private void save_btn_click(object sender, RoutedEventArgs e)
         {
-            
+            list_name_txt.IsEnabled = true;
+        }
+
+        private void list_name_txt_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            list_name_txt.IsEnabled = true;
+        }
+
+        private void list_name_txt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                TextBox box = (TextBox)sender;
+                box.IsEnabled = false;
+            }
+        }
+
+        private void list_name_txt_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            list_name_txt.IsEnabled = true;
+        }
+
+        private void list_name_txt_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("UI");
         }
         
     }

@@ -26,6 +26,8 @@ namespace elQuizer_CS
         {
             InitializeComponent();
             //QuestionBank.questions = QuestionBank.parseQuestions(Elfile.load(@"C:\Users\Ahmed\Documents\test02.qbank"));
+            //MessageBox.Show(ElFile.getLastAccessedFile());
+            ElFile.tryLoadLastAccessedFile();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -42,7 +44,7 @@ namespace elQuizer_CS
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            if (QuestionBank.questions.Count == 0)
+            if (ElTools.questions.Count == 0)
             {
                 MessageBox.Show("There are no questions!");
                 return;
@@ -53,7 +55,7 @@ namespace elQuizer_CS
 
         private void quiz_btn_click(object sender, RoutedEventArgs e)
         {
-            if (QuestionBank.questions.Count == 0)
+            if (ElTools.questions.Count == 0)
             {
                 MessageBox.Show("There are no questions!");
                 return;

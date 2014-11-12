@@ -24,6 +24,13 @@ namespace elQuizer_CS
         object answer;
         QuestionType questionType;
         AnswerType answerType;
+
+        static char delimiter = (char)7;
+
+        public static char Delimiter
+        {
+            get { return delimiter; }
+        }
         public Question(string question, object answer,
                         QuestionType questionType, AnswerType answerType)
         {
@@ -51,10 +58,7 @@ namespace elQuizer_CS
         {
             return answerType;
         }
-        public int getQuestionTypeValue()
-        {
-            return (int)questionType;
-        }
+       
         public void setAnswer(object answer)
         {
             this.answer = answer;
@@ -71,12 +75,15 @@ namespace elQuizer_CS
 
         public override string ToString()
         {
-            return "Question: " + getQuestion() + ", Answer: " + getAnswer();
+            return "Type: " + questionType + "\n" +
+                   "Question: " + getQuestion() + "\n" +
+                   "Answer: " + getAnswer();
         }
         public virtual string getFileLineString()
         {
-            return getQuestionTypeValue() + "," + getQuestion() + "," 
-                + getAnswer();
+            return (int)getQuestionType() + Delimiter.ToString() +
+                   getQuestion() + Delimiter.ToString() + 
+                   getAnswer();
         }
         public virtual string getMessage()
         {

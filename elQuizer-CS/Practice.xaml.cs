@@ -19,11 +19,6 @@ namespace elQuizer_CS
     /// </summary>
     public partial class Practice : Window
     {
-        // Red.
-        public static Color failurColor = Color.FromArgb(0xFF, 0xCB, 0x36, 0x36);
-        // Green.
-        public static Color successColor = Color.FromArgb(0xFF, 0x36, 0xCB, 0x3C);
-
         int questionsCount,
             currQuestionIndex;
         Rectangle[] rects;
@@ -56,12 +51,12 @@ namespace elQuizer_CS
 
         void prepareStage()
         {
-            QuestionBank.shuffleQuestions();
+            ElTools.shuffleQuestions();
 
             Report.userAnswers.Clear();
             Report.userBooleans.Clear();
             currQuestionIndex = 0;
-            questionsCount = QuestionBank.shuffledQuestions.Count;
+            questionsCount = ElTools.shuffledQuestions.Count;
             action_btn.Tag = "0";
             practiceFinished = false;
             setProgressGrid();
@@ -90,7 +85,7 @@ namespace elQuizer_CS
         }
         void showQuestion(int questionIndex)
         {
-            currQuestion = QuestionBank.shuffledQuestions[currQuestionIndex];
+            currQuestion = ElTools.shuffledQuestions[currQuestionIndex];
             question_txt.Text = currQuestion.getQuestion();
 
             question_message_txt.Text = currQuestion.getMessage();
@@ -209,16 +204,16 @@ namespace elQuizer_CS
         }
         void trueAnswer()
         {
-            rects[currQuestionIndex].Fill = new SolidColorBrush(successColor);
+            rects[currQuestionIndex].Fill = new SolidColorBrush(ElTools.successColor);
             switch (currQuestion.getAnswerType())
             {
                 case Question.AnswerType.Text:
-                    textAnswer.Background = new SolidColorBrush(successColor);
+                    textAnswer.Background = new SolidColorBrush(ElTools.successColor);
                     break;
                 case Question.AnswerType.Choice:
                     RadioButton radio = getCheckedRadioButton();
-                    radio.Background = new SolidColorBrush(successColor);
-                    radio.Foreground = new SolidColorBrush(successColor); 
+                    radio.Background = new SolidColorBrush(ElTools.successColor);
+                    radio.Foreground = new SolidColorBrush(ElTools.successColor); 
                     break;
                 default:
                     break;
@@ -227,22 +222,22 @@ namespace elQuizer_CS
         }
         void falseAnswer()
         {
-            rects[currQuestionIndex].Fill = new SolidColorBrush(failurColor);
+            rects[currQuestionIndex].Fill = new SolidColorBrush(ElTools.failurColor);
             switch (currQuestion.getAnswerType())
             {
                 case Question.AnswerType.Text:
-                    textAnswer.Background = new SolidColorBrush(failurColor);
+                    textAnswer.Background = new SolidColorBrush(ElTools.failurColor);
                     showCorrectTextAnswer();
                     break;
                 case Question.AnswerType.Choice:
                     RadioButton checkedRadio = getCheckedRadioButton();
-                    checkedRadio.Background = new SolidColorBrush(failurColor);
-                    checkedRadio.Foreground = new SolidColorBrush(failurColor); 
+                    checkedRadio.Background = new SolidColorBrush(ElTools.failurColor);
+                    checkedRadio.Foreground = new SolidColorBrush(ElTools.failurColor); 
                     RadioButton correctRadio = getCorrectAnswerRadioButton();
                     correctRadio.Background = 
-                        new SolidColorBrush(successColor);
+                        new SolidColorBrush(ElTools.successColor);
                     correctRadio.Foreground = 
-                        new SolidColorBrush(successColor); 
+                        new SolidColorBrush(ElTools.successColor); 
                     break;
                 default:
                     break;
@@ -336,7 +331,7 @@ namespace elQuizer_CS
 
             TextBox rightAnswer = new TextBox();
             rightAnswer.Text = currQuestion.getAnswer().ToString();
-            rightAnswer.Background = new SolidColorBrush(successColor);
+            rightAnswer.Background = new SolidColorBrush(ElTools.successColor);
             rightAnswer.VerticalAlignment = VerticalAlignment.Stretch;
             rightAnswer.VerticalContentAlignment = (
                 VerticalAlignment.Center);

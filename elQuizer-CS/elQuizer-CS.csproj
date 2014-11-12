@@ -56,14 +56,14 @@
     <Compile Include="AddNewQuestion.xaml.cs">
       <DependentUpon>AddNewQuestion.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Elfile.cs" />
+    <Compile Include="ElFile.cs" />
     <Compile Include="FillTheBlankQuestion.cs" />
     <Compile Include="MutliChoiceQuestion.cs" />
     <Compile Include="Practice.xaml.cs">
       <DependentUpon>Practice.xaml</DependentUpon>
     </Compile>
     <Compile Include="Question.cs" />
-    <Compile Include="QuestionBank.cs" />
+    <Compile Include="ElTools.cs" />
     <Compile Include="QuestionsManager.xaml.cs">
       <DependentUpon>QuestionsManager.xaml</DependentUpon>
     </Compile>

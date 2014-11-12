@@ -41,9 +41,11 @@ namespace elQuizer_CS
 
         public override string getFileLineString()
         {
-            return getQuestionTypeValue() + "," + getQuestion() + "," 
-                + answerIndex + "," + string.Join(",", choices.ToArray());
-        }
+            return (int)getQuestionType() + Delimiter.ToString() + 
+                   getQuestion() + Delimiter.ToString() +
+                   answerIndex + Delimiter.ToString() + 
+                   string.Join(Delimiter.ToString(), choices.ToArray());
+        }         
 
         public override string getMessage()
         {
