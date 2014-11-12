@@ -10,6 +10,7 @@ namespace elQuizer_CS
 {
     class ElFile
     {
+        public static string curruntFile;
         public static List<string> savedPaths = new List<string>();
         private static string dataDir = Directory.GetCurrentDirectory() + @"\eldata";
         static public string[] load()
@@ -21,6 +22,7 @@ namespace elQuizer_CS
 
             if (openFileDialog.FileName != "")
             {
+                curruntFile = extractFileName(openFileDialog.FileName);
                 return File.ReadAllLines(openFileDialog.FileName);                
             }
             return null;
@@ -29,11 +31,16 @@ namespace elQuizer_CS
         static public string[] load(string path)
         {
             if (File.Exists(path)) {
+                curruntFile = extractFileName(path);
                 return File.ReadAllLines(path);
             }
             return null;
         }
 
+        static public void updateCurruntFile()
+        {
+            ElFile.save(curruntFile + ".qbank");
+        }
         static public void tryLoadLastAccessedFile()
         {
             string file = getLastAccessedFile();
@@ -106,6 +113,18 @@ namespace elQuizer_CS
                 string.Join("\n", ElTools.getQuestionFileLines().ToArray()));            
         }
 
+        public static string extractFileName(string fullPath)
+        {
+            string[] token = fullPath.Split('\\');
+            string fileName = token[token.Length - 1];
+            string[] fileNameTokens = fileName.Split('.');
+            if (fileNameTokens[fileNameTokens.Length - 1] != "qbank" ||
+                fileNameTokens.Length == 1)
+            {
+                return null;
+            }
+            return fileName.Replace(".qbank", "");
+        }
         public static bool export()
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();

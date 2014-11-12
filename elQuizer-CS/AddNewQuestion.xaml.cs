@@ -124,7 +124,7 @@ namespace elQuizer_CS
                         MessageBox.Show("Where is the answer?!");
                         return;
                     }
-                    ElTools.questions.Add(
+                    ElTools.add(
                         new ShortAnswerQuestion(question_txt.Text,
                                                 short_answer_txt.Text));
                     break;
@@ -134,7 +134,7 @@ namespace elQuizer_CS
                         MessageBox.Show("Select the word to be filled.");
                         return;
                     }
-                    ElTools.questions.Add(
+                    ElTools.add(
                         new FillTheBlankQuestion(question_txt.Text,
                                                  tokenSelected));
                     break;
@@ -148,12 +148,12 @@ namespace elQuizer_CS
                         MessageBox.Show("Select the correct choice.");
                         return;
                     }
-                    ElTools.questions.Add(
+                    ElTools.add(
                         new MutliChoiceQuestion(
                             question_txt.Text, choiceSelected, getChoices()));
                     break;
                 case "True False":
-                    ElTools.questions.Add(
+                    ElTools.add(
                         new TrueFalseQuestion(question_txt.Text, 
                                               getTrueOrFalse()));
                     break;

@@ -17,6 +17,11 @@ namespace elQuizer_CS
         public static List<Question> questions = new List<Question>();
         public static List<Question> shuffledQuestions = new List<Question>();
 
+        public static void add(Question newQuestion)
+        {
+            questions.Add(newQuestion);
+            ElFile.updateCurruntFile();
+        }
         public static void shuffleQuestions()
         {
             shuffledQuestions.Clear();

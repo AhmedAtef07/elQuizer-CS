@@ -37,7 +37,7 @@ namespace elQuizer_CS
             dirs_list.Items.Clear();
             foreach (string path in ElFile.savedPaths)
             {
-                string fileName = cleanFileName(path);
+                string fileName = ElFile.extractFileName(path);
                 if (fileName == null)
                 {
                     continue;
@@ -48,18 +48,7 @@ namespace elQuizer_CS
                 dirs_list.Items.Add(fileName_lbl);
             }            
         }
-        string cleanFileName(string fullPath)
-        {
-            string[] token = fullPath.Split('\\');
-            string fileName = token[token.Length - 1];
-            string[] fileNameTokens = fileName.Split('.');
-            if (fileNameTokens[fileNameTokens.Length - 1] != "qbank" ||
-                fileNameTokens.Length == 1)
-            {
-                return null;
-            }
-            return fileName.Replace(".qbank", "");
-        }
+        
         void selectListItem(int index)
         {
             if (dirs_list.Items.Count > 0)
@@ -101,6 +90,7 @@ namespace elQuizer_CS
         {
             ElTools.questions.Clear();
             fillQuestionList();
+            ElFile.updateCurruntFile();
         }
 
         private void dirs_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -139,6 +129,14 @@ namespace elQuizer_CS
         {
             ElFile.delete(((Label)dirs_list.SelectedItem).Content.ToString());
             fillPathList();
+        }
+
+        private void add_new_btn(object sender, RoutedEventArgs e)
+        {
+
+            AddNewQuestion addNewQuestion = new AddNewQuestion();
+            addNewQuestion.ShowDialog();
+            fillQuestionList();
         }
         
     }

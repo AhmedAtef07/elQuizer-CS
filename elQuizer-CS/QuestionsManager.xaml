@@ -20,6 +20,7 @@
         <ListBox x:Name="question_list"  Grid.Row="1" Grid.Column="1" Margin="7,7,0,0"/>
 
         <StackPanel Grid.Row="1" Grid.Column="2" Margin="7,7,0,7" Width="180">
+            <Button Content="Add New Question" Margin="0,0,0,7" Height="27" Click="add_new_btn"/>
             <Button Content="Export Current List" Margin="0,0,0,7" Height="27" Click="Button_Click"/>
             <Button Content="Import External List"  Margin="0,0,0,7" Height="27" Click="load_btn_click"/>
             <Button Content="Clear Currunt List"  Margin="0,0,0,7" Height="27" Click="clear_btn_click"/>
