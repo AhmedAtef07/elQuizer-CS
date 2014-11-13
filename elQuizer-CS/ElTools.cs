@@ -3,14 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace elQuizer_CS
 {
-    class QuestionBank
+    class ElTools
     {
+        // Red.
+        public static Color failurColor = Color.FromArgb(0xFF, 0xCB, 0x36, 0x36);
+        // Green.
+        public static Color successColor = Color.FromArgb(0xFF, 0x36, 0xCB, 0x3C);
+
         public static List<Question> questions = new List<Question>();
         public static List<Question> shuffledQuestions = new List<Question>();
 
+        public static void add(Question newQuestion)
+        {
+            questions.Add(newQuestion);
+            ElFile.updateCurruntFile();
+        }
         public static void shuffleQuestions()
         {
             shuffledQuestions.Clear();
@@ -27,12 +38,12 @@ namespace elQuizer_CS
                 shuffledQuestions.Add(questions[t]);
             }
         }
-        public static List<Question> parseQuestions(string[] lines)
+        public static void parseQuestions(string[] lines)
         {
             List<Question> questionList = new List<Question>();
             foreach (var line in lines)
             {
-                string[] tokens = line.Split(',');
+                string[] tokens = line.Split(Question.Delimiter);
                 int firstChar = line[0] - '0';
                 Question.QuestionType quesionType;
                 quesionType = (Question.QuestionType)firstChar;
@@ -59,11 +70,12 @@ namespace elQuizer_CS
                                                     getChoices(tokens)));
                         break;
                     default:
+                        // File is corrupted.
                         break;
                 }
             }
             shuffleQuestions();
-            return questionList;
+            questions = questionList;
         }
         private static List<string> getChoices(string[] lineTokens)
         {
@@ -73,6 +85,14 @@ namespace elQuizer_CS
                 choices.Add(lineTokens[i]);
             }
             return choices;
+        }
+        public static List<string> getQuestionFileLines() {
+            List<string> lines = new List<string>();
+            foreach (var item in questions)
+            {
+                lines.Add(item.getFileLineString());
+            }
+            return lines;
         }
     }
 }

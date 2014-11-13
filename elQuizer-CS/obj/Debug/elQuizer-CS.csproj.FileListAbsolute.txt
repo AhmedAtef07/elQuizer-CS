@@ -21,3 +21,5 @@ E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS.g.resources
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer_CS.Properties.Resources.resources
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS.csproj.GenerateResource.Cache
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS.exe
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS_MarkupCompile.lref

@@ -2,14 +2,31 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="QuestionsManager" Height="359.774" Width="690.225" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <ListBox x:Name="question_list" HorizontalAlignment="Left" Width="296" Margin="203,47,0,10"/>
-        <Button Content="Save Current List" HorizontalAlignment="Left" Margin="531,150,0,0" VerticalAlignment="Top" Width="134" Click="Button_Click"/>
-        <Button Content="Import External List" HorizontalAlignment="Left" Margin="531,175,0,0" VerticalAlignment="Top" Width="134" Click="load_btn_click"/>
-        <ListBox Name="dirs_list" Margin="10,47,484,10"/>
-        <Label Content="Available Directories"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,16,0,0" Width="188"/>
-        <Label Content="Currunt Question List" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="203,16,0,0" Width="296"/>
-        <Button Content="Clear Currunt List" HorizontalAlignment="Left" Margin="531,200,0,0" VerticalAlignment="Top" Width="134" Click="clear_btn_click"/>
+    
+    <Grid Margin="7">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Content="Available Question Lists"  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" />
+        <ListBox Name="dirs_list" Grid.Row="1" Grid.Column="0" MaxWidth="300" Margin="0,7,0,0" SelectionChanged="dirs_list_SelectionChanged"/>
+
+        <Label x:Name="list_name_txt" Grid.Row="0" Grid.Column="1" Margin="7,0,0,0" HorizontalContentAlignment="Center">List Name Here</Label>
+        <ListBox x:Name="question_list"  Grid.Row="1" Grid.Column="1" Margin="7,7,0,0"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="2" Margin="7,7,0,7" Width="180">
+            <Button Content="Add New Question" Margin="0,0,0,7" Height="27" Click="add_new_btn"/>
+            <Button Content="Export Current List" Margin="0,0,0,7" Height="27" Click="Button_Click"/>
+            <Button Content="Import External List"  Margin="0,0,0,7" Height="27" Click="load_btn_click"/>
+            <Button Content="Clear Currunt List"  Margin="0,0,0,7" Height="27" Click="clear_btn_click"/>
+            <Button Content="Duplicate Selected List"  Margin="0,0,0,7" Height="27"  Click="duplicate_btn_click"/>
+            <Button Content="Delete Selected List"  Margin="0,0,0,7" Height="27"  Click="delete_btn_click"/>
+        </StackPanel>
 
     </Grid>
 </Window>

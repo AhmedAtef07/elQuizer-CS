@@ -59,15 +59,15 @@ namespace elQuizer_CS
                 grid.Children.Add(labels[i]);
             }
 
-            labels[0].Content = QuestionBank.shuffledQuestions[index].getQuestion();
-            labels[1].Content = QuestionBank.shuffledQuestions[index].getAnswer();
+            labels[0].Content = ElTools.shuffledQuestions[index].getQuestion();
+            labels[1].Content = ElTools.shuffledQuestions[index].getAnswer();
             labels[2].Content = userAnswers[index];
             
             if (userBooleans[index]) {
-                labels[2].Background = new SolidColorBrush(Practice.successColor);
+                labels[2].Background = new SolidColorBrush(ElTools.successColor);
             }
             else {
-                labels[2].Background = new SolidColorBrush(Practice.failurColor);
+                labels[2].Background = new SolidColorBrush(ElTools.failurColor);
             }
             lines += labels[0].Content.ToString() + ',' +
                      labels[1].Content.ToString() + ',' +
@@ -79,7 +79,7 @@ namespace elQuizer_CS
 
         private void save_btn_Click(object sender, RoutedEventArgs e)
         {
-            if (Elfile.saveAsText(lines))
+            if (ElFile.saveAsText(lines))
             {
                 MessageBox.Show("File saved.");
             } 

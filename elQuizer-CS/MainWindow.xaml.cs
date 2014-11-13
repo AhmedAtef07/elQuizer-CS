@@ -25,14 +25,14 @@ namespace elQuizer_CS
         public MainWindow()
         {
             InitializeComponent();
-            Elfile.getPaths();
-            QuestionBank.questions = QuestionBank.parseQuestions(Elfile.load(@"C:\Users\Ahmed\Documents\test02.qbank"));
+            //QuestionBank.questions = QuestionBank.parseQuestions(Elfile.load(@"C:\Users\Ahmed\Documents\test02.qbank"));
+            //MessageBox.Show(ElFile.getLastAccessedFile());
+            ElFile.tryLoadLastAccessedFile();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {
+        {            
             AddNewQuestion addNewQuestion = new AddNewQuestion();
-            //addNewQuestion.Show();
             addNewQuestion.ShowDialog();
         }
 
@@ -44,12 +44,22 @@ namespace elQuizer_CS
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            if (ElTools.questions.Count == 0)
+            {
+                MessageBox.Show("There are no questions!");
+                return;
+            }
             Practice practice = new Practice();
             practice.ShowDialog();
         }
 
         private void quiz_btn_click(object sender, RoutedEventArgs e)
         {
+            if (ElTools.questions.Count == 0)
+            {
+                MessageBox.Show("There are no questions!");
+                return;
+            }
             Quiz quiz = new Quiz();
             quiz.ShowDialog();
         }

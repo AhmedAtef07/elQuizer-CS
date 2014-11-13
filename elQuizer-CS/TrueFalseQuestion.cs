@@ -12,8 +12,9 @@ namespace elQuizer_CS
             : base(question, answer, QuestionType.TrueFalse, AnswerType.Choice) { }
         public override string getFileLineString()
         {
-            return getQuestionTypeValue() + "," + base.getQuestion() + ","
-                + ((bool)getAnswer()?"1":"0");
+            return (int)getQuestionType() + Delimiter.ToString() + 
+                   base.getQuestion() + Delimiter.ToString() + 
+                   ((bool)getAnswer()?"1":"0");
         }
         public override string getMessage()
         {

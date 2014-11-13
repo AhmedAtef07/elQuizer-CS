@@ -20,6 +20,7 @@ namespace elQuizer_CS
     /// </summary>
     public partial class AddNewQuestion : Window
     {
+        // TODO(ahmedatef): Check for dublicate questions.
         public AddNewQuestion()
         {
             InitializeComponent();
@@ -123,7 +124,7 @@ namespace elQuizer_CS
                         MessageBox.Show("Where is the answer?!");
                         return;
                     }
-                    QuestionBank.questions.Add(
+                    ElTools.add(
                         new ShortAnswerQuestion(question_txt.Text,
                                                 short_answer_txt.Text));
                     break;
@@ -133,7 +134,7 @@ namespace elQuizer_CS
                         MessageBox.Show("Select the word to be filled.");
                         return;
                     }
-                    QuestionBank.questions.Add(
+                    ElTools.add(
                         new FillTheBlankQuestion(question_txt.Text,
                                                  tokenSelected));
                     break;
@@ -147,12 +148,12 @@ namespace elQuizer_CS
                         MessageBox.Show("Select the correct choice.");
                         return;
                     }
-                    QuestionBank.questions.Add(
+                    ElTools.add(
                         new MutliChoiceQuestion(
                             question_txt.Text, choiceSelected, getChoices()));
                     break;
                 case "True False":
-                    QuestionBank.questions.Add(
+                    ElTools.add(
                         new TrueFalseQuestion(question_txt.Text, 
                                               getTrueOrFalse()));
                     break;
@@ -162,7 +163,7 @@ namespace elQuizer_CS
 
             MessageBoxResult result = MessageBox.Show(
                 "Question is added.\nWant to add another?", "Added", 
-                MessageBoxButton.YesNo);
+                MessageBoxButton.YesNo,MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 AddNewQuestion addNewQuestion = new AddNewQuestion();

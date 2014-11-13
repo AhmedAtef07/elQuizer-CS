@@ -37,8 +37,9 @@ namespace elQuizer_CS
 
         public override string getFileLineString()
         {
-            return getQuestionTypeValue() + "," + base.getQuestion() + ","
-                + answerIndex;
+            return (int)getQuestionType() + Delimiter.ToString() +
+                   base.getQuestion() + Delimiter.ToString() +
+                   answerIndex;
         }
 
         public override string getMessage()

@@ -21,51 +21,66 @@ namespace elQuizer_CS
     /// </summary>
     public partial class QuestionsManager : Window
     {
-        string[] lines;
         public QuestionsManager()
         {
             InitializeComponent();
+            ElFile.getLocalPaths();
             fillQuestionList();
             fillPathList();
+            ElFile.getLastAccessedFile();
+            selectListItem(0);
         }
 
         private void fillPathList()
         {
-            foreach (string item in Elfile.savedPaths)
+            ElFile.getLocalPaths();
+            dirs_list.Items.Clear();
+            foreach (string path in ElFile.savedPaths)
             {
-                
+                string fileName = ElFile.extractFileName(path);
+                if (fileName == null)
+                {
+                    continue;
+                }
+                Label fileName_lbl = new Label();
+                fileName_lbl.Content = fileName;
+                fileName_lbl.Tag = path;
+                dirs_list.Items.Add(fileName_lbl);
+            }            
+        }
+        
+        void selectListItem(int index)
+        {
+            if (dirs_list.Items.Count > 0)
+            {
+                dirs_list.SelectedIndex = index;
             }
         }
         void fillQuestionList()
-        {            
-            foreach (var question in QuestionBank.questions)
+        {
+            question_list.Items.Clear();
+            foreach (var question in ElTools.questions)
             {
-                question_list.Items.Add(question.getFileLineString());
+                question_list.Items.Add(question.ToString());
             }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {                    
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Question Bank|*.qbank";
-            saveFileDialog.Title = "Save Question Bank";
-            saveFileDialog.ShowDialog();
-
-            if (saveFileDialog.FileName != "")
+        {
+            if (ElFile.export())
             {
-                File.WriteAllText(saveFileDialog.FileName, 
-                    string.Join("\n",lines.ToArray()));
-                MessageBox.Show("File Saved."); 
+                MessageBox.Show("File saved.");
+                fillPathList();
             }
         }  
 
         private void load_btn_click(object sender, RoutedEventArgs e)
         {
-            lines = Elfile.load();
+            string[] lines = ElFile.load();
             if (lines != null)
             {
-                QuestionBank.questions = QuestionBank.parseQuestions(lines);
-                MessageBox.Show("File loaded.");                
+                ElTools.parseQuestions(lines);
+                MessageBox.Show("File loaded.");
                 fillQuestionList();
             }
             
@@ -73,7 +88,54 @@ namespace elQuizer_CS
 
         private void clear_btn_click(object sender, RoutedEventArgs e)
         {
-            QuestionBank.questions.Clear();
+            ElTools.questions.Clear();
+            fillQuestionList();
+            ElFile.updateCurruntFile();
+        }
+
+        private void dirs_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox listBox = (ListBox)sender;
+            foreach (Label item in listBox.Items)
+            {
+                item.FontWeight = FontWeights.Normal;
+            }
+            Label selectedLabel = (Label)listBox.SelectedItem;
+            if (selectedLabel == null)
+            {
+                return;
+            }
+            selectedLabel.FontWeight = FontWeights.Bold;
+
+            string[] newLines = ElFile.load(selectedLabel.Tag.ToString());
+            if (newLines == null)
+            {
+                MessageBox.Show("File disappered!");
+                fillPathList();
+                return;
+            }
+            ElTools.parseQuestions(newLines);
+            fillQuestionList();
+
+        }     
+
+        private void duplicate_btn_click(object sender, RoutedEventArgs e)
+        {
+            ElFile.duplicate(((Label)dirs_list.SelectedItem).Content.ToString());
+            fillPathList();
+        }
+
+        private void delete_btn_click(object sender, RoutedEventArgs e)
+        {
+            ElFile.delete(((Label)dirs_list.SelectedItem).Content.ToString());
+            fillPathList();
+        }
+
+        private void add_new_btn(object sender, RoutedEventArgs e)
+        {
+
+            AddNewQuestion addNewQuestion = new AddNewQuestion();
+            addNewQuestion.ShowDialog();
             fillQuestionList();
         }
         
