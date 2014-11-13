@@ -9,12 +9,11 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <StackPanel Margin="7" Grid.Column="1">
-            <Button Content="Add New" Margin="0,0,0,7" Height="27" Click="Button_Click"/>
-            <Button Content="Show All Questions" Margin="0,0,0,7" Height="27" Click="Button_Click_1" />
             <TextBlock TextAlignment="Center" Foreground="#FF636363">Current Question List</TextBlock>
             <Label Name="current_file_lbl" HorizontalContentAlignment="Center">[No List Selected]</Label>
             <Button Content="Practice" Margin="0,0,0,7" Height="27" Click="Button_Click_2"  />
             <Button Content="Quiz" Margin="0,0,0,7" Height="27" Click="quiz_btn_click"  />
+            <Button Content="Show All Questions" Margin="0,7,0,7" Height="27" Click="Button_Click_1" />
         </StackPanel>
     </Grid>
 </Window>
