@@ -60,7 +60,7 @@ namespace elQuizer_CS
                 string lastAccessedPath = null;
                 foreach (string path in files)
 	            {
-                    DateTime currDT = File.GetLastAccessTime(path);
+                    DateTime currDT = File.GetLastWriteTime(path);
                     if (DateTime.Compare(dt, currDT) < 0) 
 	                {
                         dt = currDT;
@@ -145,7 +145,7 @@ namespace elQuizer_CS
         {
             if (Directory.Exists(dataDir))
             {
-                savedPaths = Directory.GetFiles(dataDir).ToList();                
+                savedPaths = Directory.GetFiles(dataDir).ToList();                         
             }
             else
             {

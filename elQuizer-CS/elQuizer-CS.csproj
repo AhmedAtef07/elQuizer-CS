@@ -65,8 +65,8 @@
     </Compile>
     <Compile Include="Question.cs" />
     <Compile Include="ElTools.cs" />
-    <Compile Include="QuestionsManager.xaml.cs">
-      <DependentUpon>QuestionsManager.xaml</DependentUpon>
+    <Compile Include="QuestionManager.xaml.cs">
+      <DependentUpon>QuestionManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="Quiz.xaml.cs">
       <DependentUpon>Quiz.xaml</DependentUpon>
@@ -96,7 +96,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="QuestionsManager.xaml">
+    <Page Include="QuestionManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -43,7 +43,7 @@ namespace elQuizer_CS
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            QuestionsManager questionsManager = new QuestionsManager();
+            QuestionManager questionsManager = new QuestionManager();
             questionsManager.ShowDialog();
             setCurrentListText();
         }

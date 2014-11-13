@@ -19,16 +19,16 @@ namespace elQuizer_CS
     /// <summary>
     /// Interaction logic for QuestionsManager.xaml
     /// </summary>
-    public partial class QuestionsManager : Window
+    public partial class QuestionManager : Window
     {
-        public QuestionsManager()
+        public QuestionManager()
         {
             InitializeComponent();
             ElFile.getLocalPaths();
             fillQuestionList();
             fillPathList();
             ElFile.getLastAccessedFile();
-            selectListItem(0);
+            selectListItem(ElFile.currentFile);
         }
 
         private void fillPathList()
@@ -54,6 +54,18 @@ namespace elQuizer_CS
             if (dirs_list.Items.Count > 0)
             {
                 dirs_list.SelectedIndex = index;
+            }
+        }
+
+        void selectListItem(string filename)
+        {
+            for (int i = 0; i < ElFile.savedPaths.Count; i++)
+            {
+                if (ElFile.extractFileName(ElFile.savedPaths[i]) == filename)
+                {
+                    dirs_list.SelectedIndex = i;
+                    return;
+                }
             }
         }
         void fillQuestionList()

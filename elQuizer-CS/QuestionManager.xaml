@@ -1,4 +1,4 @@
-﻿<Window x:Name="ceb" x:Class="elQuizer_CS.QuestionsManager"
+﻿<Window x:Name="ceb" x:Class="elQuizer_CS.QuestionManager"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="QuestionsManager" Height="350" Width="700" WindowStartupLocation="CenterScreen" MinWidth="700" MinHeight="350">

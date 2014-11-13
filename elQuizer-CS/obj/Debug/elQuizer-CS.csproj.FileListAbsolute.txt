@@ -6,13 +6,11 @@ E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS.csprojResolve
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\AddNewQuestion.baml
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\MainWindow.baml
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\Practice.baml
-E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\QuestionsManager.baml
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\Quiz.baml
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\Report.baml
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\AddNewQuestion.g.cs
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\MainWindow.g.cs
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\Practice.g.cs
-E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\QuestionsManager.g.cs
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\Quiz.g.cs
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\Report.g.cs
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\App.g.cs
@@ -23,3 +21,5 @@ E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS.csproj.Genera
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS.exe
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\GeneratedInternalTypeHelper.g.cs
 E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\elQuizer-CS_MarkupCompile.lref
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\QuestionManager.baml
+E:\Ahmed\My Projects\elQuizer-CS\elQuizer-CS\obj\Debug\QuestionManager.g.cs
