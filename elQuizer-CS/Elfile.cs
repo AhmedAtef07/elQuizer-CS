@@ -10,7 +10,7 @@ namespace elQuizer_CS
 {
     class ElFile
     {
-        public static string curruntFile;
+        public static string currentFile;
         public static List<string> savedPaths = new List<string>();
         private static string dataDir = Directory.GetCurrentDirectory() + @"\eldata";
         static public string[] load()
@@ -22,7 +22,7 @@ namespace elQuizer_CS
 
             if (openFileDialog.FileName != "")
             {
-                curruntFile = extractFileName(openFileDialog.FileName);
+                currentFile = extractFileName(openFileDialog.FileName);
                 return File.ReadAllLines(openFileDialog.FileName);                
             }
             return null;
@@ -31,15 +31,15 @@ namespace elQuizer_CS
         static public string[] load(string path)
         {
             if (File.Exists(path)) {
-                curruntFile = extractFileName(path);
+                currentFile = extractFileName(path);
                 return File.ReadAllLines(path);
             }
             return null;
         }
 
-        static public void updateCurruntFile()
+        static public void updateCurrentFile()
         {
-            ElFile.save(curruntFile + ".qbank");
+            ElFile.save(currentFile + ".qbank");
         }
         static public void tryLoadLastAccessedFile()
         {

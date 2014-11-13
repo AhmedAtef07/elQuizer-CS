@@ -28,8 +28,13 @@ namespace elQuizer_CS
             //QuestionBank.questions = QuestionBank.parseQuestions(Elfile.load(@"C:\Users\Ahmed\Documents\test02.qbank"));
             //MessageBox.Show(ElFile.getLastAccessedFile());
             ElFile.tryLoadLastAccessedFile();
+            setCurrentListText();
         }
 
+        void setCurrentListText()
+        {
+            current_file_lbl.Content = ElFile.currentFile;
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {            
             AddNewQuestion addNewQuestion = new AddNewQuestion();
@@ -40,6 +45,7 @@ namespace elQuizer_CS
         {
             QuestionsManager questionsManager = new QuestionsManager();
             questionsManager.ShowDialog();
+            setCurrentListText();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

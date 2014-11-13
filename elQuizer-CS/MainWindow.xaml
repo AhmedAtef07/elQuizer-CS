@@ -3,10 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="252" Width="356" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button Content="Add New" HorizontalAlignment="Left" Margin="94,21,0,0" VerticalAlignment="Top" Width="165" Click="Button_Click"/>
-        <Button Content="Show All Questions" HorizontalAlignment="Left" Margin="94,96,0,0" VerticalAlignment="Top" Width="165" Click="Button_Click_1" />
-        <Button Content="Practice" HorizontalAlignment="Left" Margin="94,46,0,0" VerticalAlignment="Top" Width="165" Click="Button_Click_2"  />
-        <Button Content="Quiz" HorizontalAlignment="Left" Margin="94,71,0,0" VerticalAlignment="Top" Width="165" Click="quiz_btn_click"  />
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="7" Grid.Column="1">
+            <Button Content="Add New" Margin="0,0,0,7" Height="27" Click="Button_Click"/>
+            <Button Content="Show All Questions" Margin="0,0,0,7" Height="27" Click="Button_Click_1" />
+            <TextBlock TextAlignment="Center" Foreground="#FF636363">Current Question List</TextBlock>
+            <Label Name="current_file_lbl" HorizontalContentAlignment="Center">[No List Selected]</Label>
+            <Button Content="Practice" Margin="0,0,0,7" Height="27" Click="Button_Click_2"  />
+            <Button Content="Quiz" Margin="0,0,0,7" Height="27" Click="quiz_btn_click"  />
+        </StackPanel>
     </Grid>
 </Window>
