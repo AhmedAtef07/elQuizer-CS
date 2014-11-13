@@ -224,6 +224,10 @@ namespace elQuizer_CS
             {
                 add_question_btn_Click(null, null);
             }
+            if (e.Key == Key.Escape)
+            {
+                this.Close();
+            }
         }
 
         

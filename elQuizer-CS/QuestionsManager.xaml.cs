@@ -90,7 +90,7 @@ namespace elQuizer_CS
         {
             ElTools.questions.Clear();
             fillQuestionList();
-            ElFile.updateCurruntFile();
+            ElFile.updateCurrentFile();
         }
 
         private void dirs_list_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -127,7 +127,12 @@ namespace elQuizer_CS
 
         private void delete_btn_click(object sender, RoutedEventArgs e)
         {
-            ElFile.delete(((Label)dirs_list.SelectedItem).Content.ToString());
+            Label label = (Label)dirs_list.SelectedItem;
+            if (label == null)
+            {
+                return;
+            }
+            ElFile.delete(label.Content.ToString());
             fillPathList();
         }
 
@@ -137,6 +142,27 @@ namespace elQuizer_CS
             AddNewQuestion addNewQuestion = new AddNewQuestion();
             addNewQuestion.ShowDialog();
             fillQuestionList();
+        }
+
+        private void dirs_list_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+                delete_btn_click(null, null);
+            }
+        }
+
+        private void question_list_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Delete)
+            {
+                if (question_list.SelectedIndex == -1)
+                {
+                    return;
+                }
+                ElTools.removeAt(question_list.SelectedIndex);
+                fillQuestionList();
+            }
         }
         
     }

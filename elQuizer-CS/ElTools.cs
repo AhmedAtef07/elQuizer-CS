@@ -20,7 +20,12 @@ namespace elQuizer_CS
         public static void add(Question newQuestion)
         {
             questions.Add(newQuestion);
-            ElFile.updateCurruntFile();
+            ElFile.updateCurrentFile();
+        }
+        public static void removeAt(int index)
+        {
+            questions.RemoveAt(index);
+            ElFile.updateCurrentFile();
         }
         public static void shuffleQuestions()
         {
